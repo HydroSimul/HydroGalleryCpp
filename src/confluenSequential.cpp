@@ -2,27 +2,28 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::interfaces(r, cpp)]]
 
-arma::uvec find_in(const arma::uvec& x, const arma::uvec& table) {
-  arma::uvec result(x.n_elem);
+
+arma::uvec find_in(const arma::uvec& x, const arma::uvec& y) {
+  std::vector<arma::uword> matches;
   for (arma::uword i = 0; i < x.n_elem; ++i) {
-    arma::uvec found = arma::find(table == x(i));
-    result(i) = found.empty() ? 0 : found(0);  // 0 = not found
+    if (arma::any(y == x(i))) {
+      matches.push_back(i);
+    }
   }
-  return result;
+  return arma::uvec(matches);
 }
 
 arma::vec inflow_add(const arma::vec& num_Outflow_LastStep, const arma::umat& int_InflowCell) {
-  arma::vec num_Inflow_m3(int_InflowCell.n_cols, arma::fill::zeros);  // Changed to n_cols
+  arma::vec num_Inflow_m3(int_InflowCell.n_rows, arma::fill::zeros);  // One inflow per cell (per row)
   
-  for (arma::uword i = 0; i < int_InflowCell.n_cols; ++i) {  // Changed to loop over columns
-    arma::uvec col = int_InflowCell.col(i);  // Access column
-    
-    // Find valid indices where col > 0
-    arma::uvec valid_idx = arma::find(col > 0);
-    
+  for (arma::uword i = 0; i < int_InflowCell.n_rows; ++i) {
+    arma::urowvec inflow_cells = int_InflowCell.row(i);  // Get inflow cell indices for current cell
+    arma::uvec valid_idx = arma::find(inflow_cells > 0);  // Only consider >0 (valid) inflow cell indices
     if (!valid_idx.empty()) {
-      arma::uvec outflow_idx = arma::conv_to<arma::uvec>::from(col(valid_idx)) - 1;
-      num_Inflow_m3(i) = arma::sum(num_Outflow_LastStep.elem(outflow_idx));
+      // Convert to zero-based indices
+      arma::uvec inflow_indices = arma::conv_to<arma::uvec>::from(inflow_cells.elem(valid_idx)) - 1;
+      // Sum the outflows from these inflow cells
+      num_Inflow_m3(i) = arma::sum(num_Outflow_LastStep.elem(inflow_indices));
     }
   }
   
@@ -55,6 +56,8 @@ arma::vec confluen_WaterGAP3_U(
 
   arma::vec Riverlak_water_m3 = RIVER_water_m3_TEMP.elem(Riverlak_cellNumber_int - 1);
   arma::vec Reservoi_water_m3 = RIVER_water_m3_TEMP.elem(Reservoi_cellNumber_int - 1);
+  arma::vec Riverlak_inflow_m3 = RIVER_inflow_m3.elem(Riverlak_cellNumber_int - 1);
+  arma::vec Reservoi_inflow_m3 = RIVER_inflow_m3.elem(Reservoi_cellNumber_int - 1);
 
   const int n_Step = CELL_cellNumberStep_int.n_elem;
 
@@ -67,6 +70,8 @@ arma::vec confluen_WaterGAP3_U(
     RIVER_length_km.elem(idx_Cell_Step)
   );
 
+  
+
   arma::vec step_RIVER_Water_New = RIVER_water_m3_TEMP.elem(idx_Cell_Step) +
     RIVER_inflow_m3.elem(idx_Cell_Step) -
     step_RiverOutflow_m3;
@@ -77,7 +82,7 @@ arma::vec confluen_WaterGAP3_U(
 
     arma::vec step_RiverlakOutflow_m3 = riverlakout_LinearResorvoir(
       Riverlak_water_m3.elem(idx_Riverlak_Step),
-      RIVER_inflow_m3.elem(idx_Cell_Step.elem(idx_Step_Riverlak)),
+      Riverlak_inflow_m3.elem(idx_Riverlak_Step),
       Riverlak_capacity_m3.elem(idx_Riverlak_Step),
       param_Riverlak_lin_storeFactor.elem(idx_Riverlak_Step)
     );
@@ -95,7 +100,7 @@ arma::vec confluen_WaterGAP3_U(
 
     arma::vec step_ReservoiOutflow_m3 = reservoiReleas_Hanasaki(
       Reservoi_water_m3.elem(idx_Reservoi_Step),
-      RIVER_inflow_m3.elem(idx_Cell_Step.elem(idx_Step_Reservoi)),
+      Reservoi_inflow_m3.elem(idx_Reservoi_Step),
       Reservoi_demand_m3.elem(idx_Reservoi_Step),
       Reservoi_capacity_m3.elem(idx_Reservoi_Step),
       Reservoi_meanInflow_m3.elem(idx_Reservoi_Step),
@@ -106,7 +111,7 @@ arma::vec confluen_WaterGAP3_U(
     step_RiverOutflow_m3.elem(idx_Step_Reservoi) = step_ReservoiOutflow_m3;
     step_RIVER_Water_New.elem(idx_Step_Reservoi) =
       Reservoi_water_m3.elem(idx_Reservoi_Step) +
-      RIVER_inflow_m3.elem(idx_Cell_Step.elem(idx_Step_Reservoi)) -
+      Reservoi_inflow_m3.elem(idx_Reservoi_Step) -
       step_ReservoiOutflow_m3;
   }
 
@@ -120,6 +125,7 @@ arma::vec confluen_WaterGAP3_U(
       RIVER_outflow_m3,
       CELL_inflowCellNumberStep_int(i_Step)
     );
+    
     step_UpstreamInflow_m3 += RIVER_inflow_m3.elem(idx_Cell_Step);
 
     step_RiverOutflow_m3 = riverout_LinearResorvoir(
@@ -137,6 +143,9 @@ arma::vec confluen_WaterGAP3_U(
     if (!idx_Riverlak_Step.is_empty()) {
       arma::uvec idx_Step_Riverlak = find_in(idx_Cell_Step + 1, Riverlak_cellNumber_int);
 
+
+      
+      
       arma::vec step_RiverlakOutflow_m3 = riverlakout_LinearResorvoir(
         Riverlak_water_m3.elem(idx_Riverlak_Step),
         step_UpstreamInflow_m3.elem(idx_Step_Riverlak),

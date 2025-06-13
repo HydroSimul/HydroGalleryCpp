@@ -9,7 +9,7 @@
 //' @name routingtopology
 //' @title Get Inflow Cells
 //' @description This function calculates inflow cells based on the outflow vector.
-//' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing.
+//' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.
 //' @return A field of uvecs containing the inflow cells for each cell.
 //' @export
 // [[Rcpp::export]]
@@ -22,7 +22,7 @@ arma::field<arma::uvec> get_inflow_cells(const arma::uvec& int_Outflow) {
     arma::uword next = int_Outflow(i);
     temp[i].push_back(origin);
 
-    while (next != origin) {
+    while (next != 0) {
       temp[next - 1].push_back(origin);
       origin = next;
       next = int_Outflow(origin - 1);
@@ -113,7 +113,6 @@ arma::field<arma::umat> get_step_lastcell(const arma::field<arma::uvec>& step_ce
 
 
 //' @rdname routingtopology
-//' @param int_Outflow An integer vector of outflow cell indices.
 //' @param filepath_step_cells Path to save the step_cells field.
 //' @param filepath_step_lastcell Path to save the step_lastcell field.
 //'

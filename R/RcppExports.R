@@ -1520,7 +1520,7 @@ riverlakout_LinearResorvoir <- function(Riverlak_water_m3, Riverlak_inflow_m3, R
 #' @name routingtopology
 #' @title Get Inflow Cells
 #' @description This function calculates inflow cells based on the outflow vector.
-#' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing.
+#' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.
 #' @return A field of uvecs containing the inflow cells for each cell.
 #' @export
 get_inflow_cells <- function(int_Outflow) {
@@ -1550,7 +1550,6 @@ get_step_lastcell <- function(step_cells, inflow_lastcell) {
 }
 
 #' @rdname routingtopology
-#' @param int_Outflow An integer vector of outflow cell indices.
 #' @param filepath_step_cells Path to save the step_cells field.
 #' @param filepath_step_lastcell Path to save the step_lastcell field.
 #'

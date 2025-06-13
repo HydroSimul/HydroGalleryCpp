@@ -1,7 +1,7 @@
 Package: HydroGallery
 Type: Package
 Title: A Curated Collection of Hydrological Tools
-Version: 1.0.1
+Version: 1.0.2
 Date: 2025-01-27
 Author: Kan Lei
 Maintainer: Kan Lei <kan.lei@rub.de>

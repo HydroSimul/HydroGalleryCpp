@@ -35,7 +35,7 @@ get_cali_step(step_cells, int_Cali)
 get_upstream_cali_cell(lst_Inflow_Cell, int_CaliCell)
 }
 \arguments{
-\item{int_Outflow}{An integer vector of outflow cell indices.}
+\item{int_Outflow}{A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.}
 
 \item{filepath_step_cells}{Path to save the step_cells field.}
 

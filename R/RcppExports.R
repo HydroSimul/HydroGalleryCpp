@@ -456,8 +456,14 @@ confluenIUH_Clark <- function(CONFLUEN_responseTime_TS) {
 #' confluenSequential
 #' @name confluenSequential
 #' @export
-confluen_WaterGAP3_U <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor) {
-    .Call(`_HydroGallery_confluen_WaterGAP3_U`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3U <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor) {
+    .Call(`_HydroGallery_confluen_WaterGAP3U`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor)
+}
+
+#' @name confluenSequential
+#' @export
+confluen_WaterGAP3N <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
+    .Call(`_HydroGallery_confluen_WaterGAP3N`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
 }
 
 #' **actuall evapotranspiration**

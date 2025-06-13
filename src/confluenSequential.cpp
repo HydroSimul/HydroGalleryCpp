@@ -34,7 +34,7 @@ arma::vec inflow_add(const arma::vec& num_Outflow_LastStep, const arma::umat& in
 //' @name confluenSequential
 //' @export
 // [[Rcpp::export]]
-arma::vec confluen_WaterGAP3_U(
+arma::vec confluen_WaterGAP3U(
     arma::vec& RIVER_water_m3,
     const arma::vec& RIVER_length_km,
     const arma::vec& RIVER_velocity_km,
@@ -180,6 +180,116 @@ arma::vec confluen_WaterGAP3_U(
         step_UpstreamInflow_m3.elem(idx_Step_Reservoi) -
         step_ReservoiOutflow_m3;
     }
+
+    RIVER_outflow_m3.elem(idx_Cell_Step) = step_RiverOutflow_m3;
+    RIVER_water_m3_TEMP.elem(idx_Cell_Step) = step_RIVER_Water_New;
+  }
+
+  RIVER_water_m3 = RIVER_water_m3_TEMP;
+  return RIVER_outflow_m3;
+}
+
+//' @name confluenSequential
+//' @export
+// [[Rcpp::export]]
+arma::vec confluen_WaterGAP3N(
+    arma::vec& RIVER_water_m3,
+    const arma::vec& RIVER_length_km,
+    const arma::vec& RIVER_velocity_km,
+    const arma::vec& RIVER_inflow_m3,
+    const arma::field<arma::uvec>& CELL_cellNumberStep_int,  
+    const arma::field<arma::umat>& CELL_inflowCellNumberStep_int,  
+    const arma::uvec& Riverlak_cellNumber_int,
+    const arma::vec& Riverlak_capacity_m3,
+    const arma::vec& param_Riverlak_lin_storeFactor)
+{
+  arma::vec RIVER_water_m3_TEMP = RIVER_water_m3;
+  arma::vec RIVER_outflow_m3(RIVER_inflow_m3.n_elem, arma::fill::zeros);
+
+  arma::vec Riverlak_water_m3 = RIVER_water_m3_TEMP.elem(Riverlak_cellNumber_int - 1);
+  arma::vec Riverlak_inflow_m3 = RIVER_inflow_m3.elem(Riverlak_cellNumber_int - 1);
+
+  const int n_Step = CELL_cellNumberStep_int.n_elem;
+
+  arma::uvec idx_Cell_Step = CELL_cellNumberStep_int(0) - 1;
+
+  arma::vec step_RiverOutflow_m3 = riverout_LinearResorvoir(
+    RIVER_water_m3_TEMP.elem(idx_Cell_Step),
+    RIVER_inflow_m3.elem(idx_Cell_Step),
+    RIVER_velocity_km.elem(idx_Cell_Step),
+    RIVER_length_km.elem(idx_Cell_Step)
+  );
+
+  
+
+  arma::vec step_RIVER_Water_New = RIVER_water_m3_TEMP.elem(idx_Cell_Step) +
+    RIVER_inflow_m3.elem(idx_Cell_Step) -
+    step_RiverOutflow_m3;
+
+  arma::uvec idx_Riverlak_Step = find_in(Riverlak_cellNumber_int, idx_Cell_Step + 1);
+  if (!idx_Riverlak_Step.is_empty()) {
+    arma::uvec idx_Step_Riverlak = find_in(idx_Cell_Step + 1, Riverlak_cellNumber_int);
+
+    arma::vec step_RiverlakOutflow_m3 = riverlakout_LinearResorvoir(
+      Riverlak_water_m3.elem(idx_Riverlak_Step),
+      Riverlak_inflow_m3.elem(idx_Riverlak_Step),
+      Riverlak_capacity_m3.elem(idx_Riverlak_Step),
+      param_Riverlak_lin_storeFactor.elem(idx_Riverlak_Step)
+    );
+
+    step_RiverOutflow_m3.elem(idx_Step_Riverlak) = step_RiverlakOutflow_m3;
+    step_RIVER_Water_New.elem(idx_Step_Riverlak) =
+      Riverlak_water_m3.elem(idx_Riverlak_Step) +
+      RIVER_inflow_m3.elem(idx_Cell_Step.elem(idx_Step_Riverlak)) -
+      step_RiverlakOutflow_m3;
+  }
+
+
+  RIVER_outflow_m3.elem(idx_Cell_Step) = step_RiverOutflow_m3;
+  RIVER_water_m3_TEMP.elem(idx_Cell_Step) = step_RIVER_Water_New;
+
+  for (int i_Step = 1; i_Step < n_Step; ++i_Step) {
+    idx_Cell_Step = CELL_cellNumberStep_int(i_Step) - 1;
+
+    arma::vec step_UpstreamInflow_m3 = inflow_add(
+      RIVER_outflow_m3,
+      CELL_inflowCellNumberStep_int(i_Step)
+    );
+    
+    step_UpstreamInflow_m3 += RIVER_inflow_m3.elem(idx_Cell_Step);
+
+    step_RiverOutflow_m3 = riverout_LinearResorvoir(
+      RIVER_water_m3_TEMP.elem(idx_Cell_Step),
+      step_UpstreamInflow_m3,
+      RIVER_velocity_km.elem(idx_Cell_Step),
+      RIVER_length_km.elem(idx_Cell_Step)
+    );
+
+    step_RIVER_Water_New = RIVER_water_m3_TEMP.elem(idx_Cell_Step) +
+      step_UpstreamInflow_m3 -
+      step_RiverOutflow_m3;
+
+    idx_Riverlak_Step = find_in(Riverlak_cellNumber_int, idx_Cell_Step + 1);
+    if (!idx_Riverlak_Step.is_empty()) {
+      arma::uvec idx_Step_Riverlak = find_in(idx_Cell_Step + 1, Riverlak_cellNumber_int);
+
+
+      
+      
+      arma::vec step_RiverlakOutflow_m3 = riverlakout_LinearResorvoir(
+        Riverlak_water_m3.elem(idx_Riverlak_Step),
+        step_UpstreamInflow_m3.elem(idx_Step_Riverlak),
+        Riverlak_capacity_m3.elem(idx_Riverlak_Step),
+        param_Riverlak_lin_storeFactor.elem(idx_Riverlak_Step)
+      );
+
+      step_RiverOutflow_m3.elem(idx_Step_Riverlak) = step_RiverlakOutflow_m3;
+      step_RIVER_Water_New.elem(idx_Step_Riverlak) =
+        Riverlak_water_m3.elem(idx_Riverlak_Step) +
+        step_UpstreamInflow_m3.elem(idx_Step_Riverlak) -
+        step_RiverlakOutflow_m3;
+    }
+
 
     RIVER_outflow_m3.elem(idx_Cell_Step) = step_RiverOutflow_m3;
     RIVER_water_m3_TEMP.elem(idx_Cell_Step) = step_RIVER_Water_New;

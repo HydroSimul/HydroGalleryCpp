@@ -2,10 +2,11 @@
 % Please edit documentation in R/RcppExports.R
 \name{confluenSequential}
 \alias{confluenSequential}
-\alias{confluen_WaterGAP3_U}
+\alias{confluen_WaterGAP3U}
+\alias{confluen_WaterGAP3N}
 \title{confluenSequential}
 \usage{
-confluen_WaterGAP3_U(
+confluen_WaterGAP3U(
   RIVER_water_m3,
   RIVER_length_km,
   RIVER_velocity_km,
@@ -20,6 +21,18 @@ confluen_WaterGAP3_U(
   Reservoi_meanInflow_m3,
   Reservoi_meanDemand_m3,
   Reservoi_isIrrigate_01,
+  param_Riverlak_lin_storeFactor
+)
+
+confluen_WaterGAP3N(
+  RIVER_water_m3,
+  RIVER_length_km,
+  RIVER_velocity_km,
+  RIVER_inflow_m3,
+  CELL_cellNumberStep_int,
+  CELL_inflowCellNumberStep_int,
+  Riverlak_cellNumber_int,
+  Riverlak_capacity_m3,
   param_Riverlak_lin_storeFactor
 )
 }

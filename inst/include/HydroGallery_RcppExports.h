@@ -487,17 +487,38 @@ namespace HydroGallery {
         return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
-    inline arma::vec confluen_WaterGAP3_U(arma::vec& RIVER_water_m3, const arma::vec& RIVER_length_km, const arma::vec& RIVER_velocity_km, const arma::vec& RIVER_inflow_m3, const arma::field<arma::uvec>& CELL_cellNumberStep_int, const arma::field<arma::umat>& CELL_inflowCellNumberStep_int, const arma::uvec& Riverlak_cellNumber_int, const arma::vec& Riverlak_capacity_m3, const arma::uvec& Reservoi_cellNumber_int, const arma::vec& Reservoi_demand_m3, const arma::vec& Reservoi_capacity_m3, const arma::vec& Reservoi_meanInflow_m3, const arma::vec& Reservoi_meanDemand_m3, const arma::uvec& Reservoi_isIrrigate_01, const arma::vec& param_Riverlak_lin_storeFactor) {
-        typedef SEXP(*Ptr_confluen_WaterGAP3_U)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
-        static Ptr_confluen_WaterGAP3_U p_confluen_WaterGAP3_U = NULL;
-        if (p_confluen_WaterGAP3_U == NULL) {
-            validateSignature("arma::vec(*confluen_WaterGAP3_U)(arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::field<arma::uvec>&,const arma::field<arma::umat>&,const arma::uvec&,const arma::vec&,const arma::uvec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::uvec&,const arma::vec&)");
-            p_confluen_WaterGAP3_U = (Ptr_confluen_WaterGAP3_U)R_GetCCallable("HydroGallery", "_HydroGallery_confluen_WaterGAP3_U");
+    inline arma::vec confluen_WaterGAP3U(arma::vec& RIVER_water_m3, const arma::vec& RIVER_length_km, const arma::vec& RIVER_velocity_km, const arma::vec& RIVER_inflow_m3, const arma::field<arma::uvec>& CELL_cellNumberStep_int, const arma::field<arma::umat>& CELL_inflowCellNumberStep_int, const arma::uvec& Riverlak_cellNumber_int, const arma::vec& Riverlak_capacity_m3, const arma::uvec& Reservoi_cellNumber_int, const arma::vec& Reservoi_demand_m3, const arma::vec& Reservoi_capacity_m3, const arma::vec& Reservoi_meanInflow_m3, const arma::vec& Reservoi_meanDemand_m3, const arma::uvec& Reservoi_isIrrigate_01, const arma::vec& param_Riverlak_lin_storeFactor) {
+        typedef SEXP(*Ptr_confluen_WaterGAP3U)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_confluen_WaterGAP3U p_confluen_WaterGAP3U = NULL;
+        if (p_confluen_WaterGAP3U == NULL) {
+            validateSignature("arma::vec(*confluen_WaterGAP3U)(arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::field<arma::uvec>&,const arma::field<arma::umat>&,const arma::uvec&,const arma::vec&,const arma::uvec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::uvec&,const arma::vec&)");
+            p_confluen_WaterGAP3U = (Ptr_confluen_WaterGAP3U)R_GetCCallable("HydroGallery", "_HydroGallery_confluen_WaterGAP3U");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_confluen_WaterGAP3_U(Shield<SEXP>(Rcpp::wrap(RIVER_water_m3)), Shield<SEXP>(Rcpp::wrap(RIVER_length_km)), Shield<SEXP>(Rcpp::wrap(RIVER_velocity_km)), Shield<SEXP>(Rcpp::wrap(RIVER_inflow_m3)), Shield<SEXP>(Rcpp::wrap(CELL_cellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(CELL_inflowCellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Reservoi_demand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_meanInflow_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_meanDemand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_isIrrigate_01)), Shield<SEXP>(Rcpp::wrap(param_Riverlak_lin_storeFactor)));
+            rcpp_result_gen = p_confluen_WaterGAP3U(Shield<SEXP>(Rcpp::wrap(RIVER_water_m3)), Shield<SEXP>(Rcpp::wrap(RIVER_length_km)), Shield<SEXP>(Rcpp::wrap(RIVER_velocity_km)), Shield<SEXP>(Rcpp::wrap(RIVER_inflow_m3)), Shield<SEXP>(Rcpp::wrap(CELL_cellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(CELL_inflowCellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Reservoi_demand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_capacity_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_meanInflow_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_meanDemand_m3)), Shield<SEXP>(Rcpp::wrap(Reservoi_isIrrigate_01)), Shield<SEXP>(Rcpp::wrap(param_Riverlak_lin_storeFactor)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
+    }
+
+    inline arma::vec confluen_WaterGAP3N(arma::vec& RIVER_water_m3, const arma::vec& RIVER_length_km, const arma::vec& RIVER_velocity_km, const arma::vec& RIVER_inflow_m3, const arma::field<arma::uvec>& CELL_cellNumberStep_int, const arma::field<arma::umat>& CELL_inflowCellNumberStep_int, const arma::uvec& Riverlak_cellNumber_int, const arma::vec& Riverlak_capacity_m3, const arma::vec& param_Riverlak_lin_storeFactor) {
+        typedef SEXP(*Ptr_confluen_WaterGAP3N)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_confluen_WaterGAP3N p_confluen_WaterGAP3N = NULL;
+        if (p_confluen_WaterGAP3N == NULL) {
+            validateSignature("arma::vec(*confluen_WaterGAP3N)(arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::field<arma::uvec>&,const arma::field<arma::umat>&,const arma::uvec&,const arma::vec&,const arma::vec&)");
+            p_confluen_WaterGAP3N = (Ptr_confluen_WaterGAP3N)R_GetCCallable("HydroGallery", "_HydroGallery_confluen_WaterGAP3N");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluen_WaterGAP3N(Shield<SEXP>(Rcpp::wrap(RIVER_water_m3)), Shield<SEXP>(Rcpp::wrap(RIVER_length_km)), Shield<SEXP>(Rcpp::wrap(RIVER_velocity_km)), Shield<SEXP>(Rcpp::wrap(RIVER_inflow_m3)), Shield<SEXP>(Rcpp::wrap(CELL_cellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(CELL_inflowCellNumberStep_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_cellNumber_int)), Shield<SEXP>(Rcpp::wrap(Riverlak_capacity_m3)), Shield<SEXP>(Rcpp::wrap(param_Riverlak_lin_storeFactor)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

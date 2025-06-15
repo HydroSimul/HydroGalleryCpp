@@ -113,15 +113,15 @@ arma::field<arma::umat> get_step_lastcell(const arma::field<arma::uvec>& step_ce
 
 
 //' @rdname routingtopology
-//' @param filepath_step_cells Path to save the step_cells field.
-//' @param filepath_step_lastcell Path to save the step_lastcell field.
+//' @param fn_Step_Cell Path to save the step_cells field.
+//' @param fn_Step_LastCell Path to save the step_lastcell field.
 //'
 //' @return NULL (invisible)
 //' @export
 // [[Rcpp::export]]
 void generate_step_cell(const arma::uvec& int_Outflow,
-                                     const std::string& filepath_step_cells,
-                                     const std::string& filepath_step_lastcell) {
+                                     const std::string& fn_Step_Cell,
+                                     const std::string& fn_Step_LastCell) {
   // Generate topology components
   arma::field<arma::uvec> inflow_cells = get_inflow_cells(int_Outflow);
   arma::umat inflow_lastcell = get_inflow_lastcell(int_Outflow);
@@ -129,9 +129,87 @@ void generate_step_cell(const arma::uvec& int_Outflow,
   arma::field<arma::umat> step_lastcell = get_step_lastcell(step_cells, inflow_lastcell);
 
   // Save to files
-  step_cells.save(filepath_step_cells, arma::arma_binary);
-  step_lastcell.save(filepath_step_lastcell, arma::arma_binary);
+  step_cells.save(fn_Step_Cell, arma::arma_binary);
+  step_lastcell.save(fn_Step_LastCell, arma::arma_binary);
 }
+
+#include <unordered_set>
+arma::uvec get_extra_in_step(const arma::uvec& Step_Cell, const arma::uvec& Extra_Cell) {
+  std::unordered_set<arma::uword> step_set(Step_Cell.begin(), Step_Cell.end());
+  std::vector<arma::uword> matches;
+  
+  for (arma::uword i = 0; i < Extra_Cell.n_elem; ++i) {
+    if (step_set.count(Extra_Cell(i))) {
+      matches.push_back(i + 1);  // 1-based index
+    }
+  }
+  
+  return arma::uvec(matches);
+}
+
+//' @rdname routingtopology
+//' @param Step_cellNumber_int Cell number of the step.
+//' @param Extra_cellNumber_int Cell number of the extra cells.
+//' @export
+// [[Rcpp::export]]
+arma::field<arma::uvec> get_step_extra_cell(
+    const arma::field<arma::uvec>& Step_cellNumber_int,
+    const arma::uvec& Extra_cellNumber_int) 
+{
+  arma::field<arma::uvec> Step_Extra_cellNumber_int(Step_cellNumber_int.n_elem);
+  
+  for (arma::uword i = 0; i < Step_cellNumber_int.n_elem; ++i) {
+    const arma::uvec& step_cells = Step_cellNumber_int(i);
+    // Get 1-based indices of matches
+    Step_Extra_cellNumber_int(i) = get_extra_in_step(step_cells, Extra_cellNumber_int); // +1 for 1-based indexing
+  }
+  
+  return Step_Extra_cellNumber_int;
+}
+
+
+//' @rdname routingtopology
+//' @param fn_Step_Cell Path to read the step_cells field.
+//' @param fn_Extra_Cell Path to read the extra cells field.
+//' @param fn_Step_Extra_Cell path to write the step extra cell number.
+//' @return NULL (invisible)
+//' @export
+// [[Rcpp::export]]
+void generate_step_extra_cell(const std::string& fn_Step_Cell,
+                              const std::string& fn_Extra_Cell,
+                              const std::string& fn_Step_Extra_Cell) {
+  
+  
+  arma::field<arma::uvec> Step_cellNumber_int;
+  Step_cellNumber_int.load(fn_Step_Cell, arma::arma_binary);
+  arma::uvec Extra_cellNumber_int;
+  Extra_cellNumber_int.load(fn_Extra_Cell, arma::arma_binary);
+  
+  arma::field<arma::uvec> Step_Extra_cellNumber_int = get_step_extra_cell(Step_cellNumber_int, Extra_cellNumber_int);
+
+  // Save to files
+  Step_Extra_cellNumber_int.save(fn_Step_Extra_Cell, arma::arma_binary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,7 @@
 //' @export
 // [[Rcpp::export]]
 arma::vec reservoiReleas_Hanasaki(
-    arma::vec Reservoi_water_m3,
+    const arma::vec& Reservoi_water_m3,
     const arma::vec& Reservoi_inflow_m3,
     const arma::vec& Reservoi_demand_m3,
     const arma::vec& Reservoi_capacity_m3,
@@ -19,12 +19,13 @@ arma::vec reservoiReleas_Hanasaki(
     const arma::vec& Reservoi_meanDemand_m3,
     const arma::uvec& Reservoi_isIrrigate_01)
 {
-    // Update reservoir water with inflow
-    Reservoi_water_m3 += Reservoi_inflow_m3;
-    
+  // Reservoi overflow
+  arma::vec Reservoi_overflow_m3 = arma::max(Reservoi_water_m3 + Reservoi_inflow_m3 - Reservoi_capacity_m3, arma::zeros(size(Reservoi_water_m3)));
+  arma::vec Reservoi_water_m3_TEMP = arma::min(Reservoi_water_m3 + Reservoi_inflow_m3, Reservoi_capacity_m3);
+  
     // Initialize provisional release (eq-4)
     arma::vec Reservoi_releaseProvis_m3 = Reservoi_meanInflow_m3;
-    arma::vec Reservoi_releaseCoefficient_1 = arma::clamp(Reservoi_water_m3 / Reservoi_capacity_m3, 0.1, 1.0);
+    arma::vec Reservoi_releaseCoefficient_1 = arma::clamp(Reservoi_water_m3_TEMP / Reservoi_capacity_m3, 0.1, 1.0);
     // Apply irrigation conditions (eq-5)
     arma::uvec irrigate_idx = arma::find(Reservoi_isIrrigate_01 == 1);
     arma::uvec special_case_idx = arma::find(Reservoi_isIrrigate_01 == 1 && 
@@ -58,7 +59,7 @@ arma::vec reservoiReleas_Hanasaki(
         (1.0 - temp_inflowRatio_.elem(small_ratio_idx)) % 
         Reservoi_inflow_m3.elem(small_ratio_idx);
     
-    return release;
+    return release + Reservoi_overflow_m3;
 }
 
 //' @rdname reservoi

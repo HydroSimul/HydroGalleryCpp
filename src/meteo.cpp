@@ -188,6 +188,7 @@ arma::vec meteo_nettoRadiat_WaterGAP3(
  arma::vec R_ns = (1 - LAND_albedo_1) % ATMOS_solarRadiat_MJ;
  arma::vec epsilon_a = meteo_atmosEmissivity_Idso(ATMOS_temperature_Cel);
  arma::vec factor_Cloud = ATMOS_solarRadiat_MJ / ATMOS_solarRadiatClearSky_MJ;
+ factor_Cloud.elem(arma::find(ATMOS_solarRadiatClearSky_MJ == 0)).zeros();
  factor_Cloud.transform([](double val) { return std::min(val, 1.0); });
 
  arma::vec ATMOS_temperature_T = ATMOS_temperature_Cel + 273.16;

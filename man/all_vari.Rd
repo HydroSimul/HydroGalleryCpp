@@ -166,9 +166,9 @@
 
 \item{CELL_landArea_km2}{(km2) land area of the basin}
 
-\item{CELL_cellNumberStep_int}{(int) step number of basin cells}
+\item{NET_cellNumberStep_int}{(int) step number of basin cells}
 
-\item{CELL_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
+\item{NET_inflowCellNumberStep_int}{(int) step number of inflow cells in the basin}
 
 \item{Upstream_cellNumber_int}{Upstream cell number}
 

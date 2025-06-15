@@ -16,7 +16,7 @@ arma::vec riverlakout_LinearResorvoir(
     const arma::vec& param_Riverlak_lin_storeFactor);
 
 arma::vec reservoiReleas_Hanasaki(
-    arma::vec Reservoi_water_m3,
+    const arma::vec& Reservoi_water_m3,
     const arma::vec& Reservoi_inflow_m3,
     const arma::vec& Reservoi_demand_m3,
     const arma::vec& Reservoi_capacity_m3,

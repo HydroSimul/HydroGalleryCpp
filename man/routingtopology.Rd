@@ -7,6 +7,8 @@
 \alias{get_step_cells}
 \alias{get_step_lastcell}
 \alias{generate_step_cell}
+\alias{get_step_extra_cell}
+\alias{generate_step_extra_cell}
 \alias{get_cell_in_basin}
 \alias{get_inter_basin}
 \alias{get_new_outflow}
@@ -22,7 +24,11 @@ get_step_cells(inflow_cells)
 
 get_step_lastcell(step_cells, inflow_lastcell)
 
-generate_step_cell(int_Outflow, filepath_step_cells, filepath_step_lastcell)
+generate_step_cell(int_Outflow, fn_Step_Cell, fn_Step_LastCell)
+
+get_step_extra_cell(Step_cellNumber_int, Extra_cellNumber_int)
+
+generate_step_extra_cell(fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_Cell)
 
 get_cell_in_basin(lst_Inflow_Cell, int_OutLet, int_TestCell)
 
@@ -37,9 +43,17 @@ get_upstream_cali_cell(lst_Inflow_Cell, int_CaliCell)
 \arguments{
 \item{int_Outflow}{A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.}
 
-\item{filepath_step_cells}{Path to save the step_cells field.}
+\item{fn_Step_Cell}{Path to read the step_cells field.}
 
-\item{filepath_step_lastcell}{Path to save the step_lastcell field.}
+\item{fn_Step_LastCell}{Path to save the step_lastcell field.}
+
+\item{Step_cellNumber_int}{Cell number of the step.}
+
+\item{Extra_cellNumber_int}{Cell number of the extra cells.}
+
+\item{fn_Extra_Cell}{Path to read the extra cells field.}
+
+\item{fn_Step_Extra_Cell}{path to write the step extra cell number.}
 
 \item{lst_Inflow_Cell}{A list of integer vectors, where each vector contains the cells that flow into the respective cell.}
 
@@ -57,6 +71,8 @@ get_upstream_cali_cell(lst_Inflow_Cell, int_CaliCell)
 }
 \value{
 A field of uvecs containing the inflow cells for each cell.
+
+NULL (invisible)
 
 NULL (invisible)
 

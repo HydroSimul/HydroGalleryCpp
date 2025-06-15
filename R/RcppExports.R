@@ -456,14 +456,14 @@ confluenIUH_Clark <- function(CONFLUEN_responseTime_TS) {
 #' confluenSequential
 #' @name confluenSequential
 #' @export
-confluen_WaterGAP3U <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor) {
-    .Call(`_HydroGallery_confluen_WaterGAP3U`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3U <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, NET_reservoiNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor) {
+    .Call(`_HydroGallery_confluen_WaterGAP3U`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, NET_reservoiNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor)
 }
 
 #' @name confluenSequential
 #' @export
-confluen_WaterGAP3N <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
-    .Call(`_HydroGallery_confluen_WaterGAP3N`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, CELL_cellNumberStep_int, CELL_inflowCellNumberStep_int, Riverlak_cellNumber_int, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
+confluen_WaterGAP3N <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
+    .Call(`_HydroGallery_confluen_WaterGAP3N`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
 }
 
 #' **actuall evapotranspiration**
@@ -1556,13 +1556,31 @@ get_step_lastcell <- function(step_cells, inflow_lastcell) {
 }
 
 #' @rdname routingtopology
-#' @param filepath_step_cells Path to save the step_cells field.
-#' @param filepath_step_lastcell Path to save the step_lastcell field.
+#' @param fn_Step_Cell Path to save the step_cells field.
+#' @param fn_Step_LastCell Path to save the step_lastcell field.
 #'
 #' @return NULL (invisible)
 #' @export
-generate_step_cell <- function(int_Outflow, filepath_step_cells, filepath_step_lastcell) {
-    invisible(.Call(`_HydroGallery_generate_step_cell`, int_Outflow, filepath_step_cells, filepath_step_lastcell))
+generate_step_cell <- function(int_Outflow, fn_Step_Cell, fn_Step_LastCell) {
+    invisible(.Call(`_HydroGallery_generate_step_cell`, int_Outflow, fn_Step_Cell, fn_Step_LastCell))
+}
+
+#' @rdname routingtopology
+#' @param Step_cellNumber_int Cell number of the step.
+#' @param Extra_cellNumber_int Cell number of the extra cells.
+#' @export
+get_step_extra_cell <- function(Step_cellNumber_int, Extra_cellNumber_int) {
+    .Call(`_HydroGallery_get_step_extra_cell`, Step_cellNumber_int, Extra_cellNumber_int)
+}
+
+#' @rdname routingtopology
+#' @param fn_Step_Cell Path to read the step_cells field.
+#' @param fn_Extra_Cell Path to read the extra cells field.
+#' @param fn_Step_Extra_Cell path to write the step extra cell number.
+#' @return NULL (invisible)
+#' @export
+generate_step_extra_cell <- function(fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_Cell) {
+    invisible(.Call(`_HydroGallery_generate_step_extra_cell`, fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_Cell))
 }
 
 #' @rdname routingtopology

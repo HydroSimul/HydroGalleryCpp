@@ -46,12 +46,14 @@ arma::vec riverlakout_LinearResorvoir(
     Riverlak_inflow_m3 % (1.0 - param_Riverlak_lin_storeFactor % (1.0 - exp_term));
   
   // Calculate new water volume with constraints
-  arma::vec Riverlak_water_New = arma::min(Riverlak_water_m3_TEMP + Riverlak_inflow_m3 - Riverlak_outflow_m3, 
+  Riverlak_water_m3_TEMP += Riverlak_inflow_m3 - Riverlak_outflow_m3;
+  arma::vec Riverlak_overflow2_m3 = arma::max(Riverlak_water_m3_TEMP - Riverlak_capacity_m3, arma::zeros(size(Riverlak_water_m3)));
+  Riverlak_water_m3_TEMP = arma::min(Riverlak_water_m3_TEMP, 
                                            Riverlak_capacity_m3);
-  Riverlak_water_New.transform([](double val) { return std::max(val, 0.0); });
+  Riverlak_water_m3_TEMP.transform([](double val) { return std::max(val, 0.0); });
   
   // Adjust outflow to maintain mass balance
-  Riverlak_outflow_m3 = Riverlak_water_m3_TEMP + Riverlak_inflow_m3 - Riverlak_water_New + Riverlak_overflow_m3;
+  Riverlak_outflow_m3 += Riverlak_overflow_m3 + Riverlak_overflow2_m3;
   
   return Riverlak_outflow_m3;
 }

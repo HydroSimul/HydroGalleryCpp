@@ -453,19 +453,6 @@ confluenIUH_Clark <- function(CONFLUEN_responseTime_TS) {
     .Call(`_HydroGallery_confluenIUH_Clark`, CONFLUEN_responseTime_TS)
 }
 
-#' confluenSequential
-#' @name confluenSequential
-#' @export
-confluen_WaterGAP3U <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, NET_reservoiNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor) {
-    .Call(`_HydroGallery_confluen_WaterGAP3U`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, NET_reservoiNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, Reservoi_cellNumber_int, Reservoi_water_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01, param_Riverlak_lin_storeFactor)
-}
-
-#' @name confluenSequential
-#' @export
-confluen_WaterGAP3N <- function(RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor) {
-    .Call(`_HydroGallery_confluen_WaterGAP3N`, RIVER_water_m3, RIVER_length_km, RIVER_velocity_km, RIVER_inflow_m3, NET_cellNumberStep_int, NET_upstreamCellNumberStep_int, NET_riverlakNumberStep_int, Riverlak_cellNumber_int, Riverlak_water_m3, Riverlak_capacity_m3, param_Riverlak_lin_storeFactor)
-}
-
 #' **actuall evapotranspiration**
 #' @name evatransActual
 #' @inheritParams all_vari

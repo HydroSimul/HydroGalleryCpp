@@ -2230,22 +2230,23 @@ RcppExport SEXP _HydroGallery_lateral_Arno(SEXP GROUND_water_mmSEXP, SEXP GROUND
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// meteo_extraterreSolarRadiat_FAO56
-arma::vec meteo_extraterreSolarRadiat_FAO56(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree);
-static SEXP _HydroGallery_meteo_extraterreSolarRadiat_FAO56_try(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP) {
+// meteo_solarRadiatClearSky_FAO56
+arma::vec meteo_solarRadiatClearSky_FAO56(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree, const arma::vec& LAND_elevation_m);
+static SEXP _HydroGallery_meteo_solarRadiatClearSky_FAO56_try(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP, SEXP LAND_elevation_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type Time_dayOfYear_(Time_dayOfYear_SEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type LAND_latitude_Degree(LAND_latitude_DegreeSEXP);
-    rcpp_result_gen = Rcpp::wrap(meteo_extraterreSolarRadiat_FAO56(Time_dayOfYear_, LAND_latitude_Degree));
+    Rcpp::traits::input_parameter< const arma::vec& >::type LAND_elevation_m(LAND_elevation_mSEXP);
+    rcpp_result_gen = Rcpp::wrap(meteo_solarRadiatClearSky_FAO56(Time_dayOfYear_, LAND_latitude_Degree, LAND_elevation_m));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _HydroGallery_meteo_extraterreSolarRadiat_FAO56(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP) {
+RcppExport SEXP _HydroGallery_meteo_solarRadiatClearSky_FAO56(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP, SEXP LAND_elevation_mSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_HydroGallery_meteo_extraterreSolarRadiat_FAO56_try(Time_dayOfYear_SEXP, LAND_latitude_DegreeSEXP));
+        rcpp_result_gen = PROTECT(_HydroGallery_meteo_solarRadiatClearSky_FAO56_try(Time_dayOfYear_SEXP, LAND_latitude_DegreeSEXP, LAND_elevation_mSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2265,23 +2266,22 @@ RcppExport SEXP _HydroGallery_meteo_extraterreSolarRadiat_FAO56(SEXP Time_dayOfY
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// meteo_solarRadiatClearSky_FAO56
-arma::vec meteo_solarRadiatClearSky_FAO56(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree, const arma::vec& LAND_elevation_m);
-static SEXP _HydroGallery_meteo_solarRadiatClearSky_FAO56_try(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP, SEXP LAND_elevation_mSEXP) {
+// meteo_solarRadiatClearSky_WaterGAP3
+arma::vec meteo_solarRadiatClearSky_WaterGAP3(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree);
+static SEXP _HydroGallery_meteo_solarRadiatClearSky_WaterGAP3_try(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type Time_dayOfYear_(Time_dayOfYear_SEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type LAND_latitude_Degree(LAND_latitude_DegreeSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type LAND_elevation_m(LAND_elevation_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(meteo_solarRadiatClearSky_FAO56(Time_dayOfYear_, LAND_latitude_Degree, LAND_elevation_m));
+    rcpp_result_gen = Rcpp::wrap(meteo_solarRadiatClearSky_WaterGAP3(Time_dayOfYear_, LAND_latitude_Degree));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _HydroGallery_meteo_solarRadiatClearSky_FAO56(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP, SEXP LAND_elevation_mSEXP) {
+RcppExport SEXP _HydroGallery_meteo_solarRadiatClearSky_WaterGAP3(SEXP Time_dayOfYear_SEXP, SEXP LAND_latitude_DegreeSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_HydroGallery_meteo_solarRadiatClearSky_FAO56_try(Time_dayOfYear_SEXP, LAND_latitude_DegreeSEXP, LAND_elevation_mSEXP));
+        rcpp_result_gen = PROTECT(_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3_try(Time_dayOfYear_SEXP, LAND_latitude_DegreeSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2594,24 +2594,61 @@ RcppExport SEXP _HydroGallery_meteo_atmosEmissivity_Idso(SEXP ATMOS_temperature_
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// meteo_nettoRadiat_WaterGAP3
-arma::vec meteo_nettoRadiat_WaterGAP3(const arma::vec& ATMOS_temperature_Cel, const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_solarRadiatClearSky_MJ, const arma::vec& LAND_albedo_1);
-static SEXP _HydroGallery_meteo_nettoRadiat_WaterGAP3_try(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_solarRadiatClearSky_MJSEXP, SEXP LAND_albedo_1SEXP) {
+// meteo_nettoLongRadiat_WaterGAP3
+arma::vec meteo_nettoLongRadiat_WaterGAP3(const arma::vec& ATMOS_temperature_Cel, const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_solarRadiatClearSky_MJ, const arma::vec& param_ATMOS_nettoRadiat_wg3a, const arma::vec& param_ATMOS_nettoRadiat_wg3b);
+static SEXP _HydroGallery_meteo_nettoLongRadiat_WaterGAP3_try(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_solarRadiatClearSky_MJSEXP, SEXP param_ATMOS_nettoRadiat_wg3aSEXP, SEXP param_ATMOS_nettoRadiat_wg3bSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type ATMOS_temperature_Cel(ATMOS_temperature_CelSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type ATMOS_solarRadiat_MJ(ATMOS_solarRadiat_MJSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type ATMOS_solarRadiatClearSky_MJ(ATMOS_solarRadiatClearSky_MJSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type LAND_albedo_1(LAND_albedo_1SEXP);
-    rcpp_result_gen = Rcpp::wrap(meteo_nettoRadiat_WaterGAP3(ATMOS_temperature_Cel, ATMOS_solarRadiat_MJ, ATMOS_solarRadiatClearSky_MJ, LAND_albedo_1));
+    Rcpp::traits::input_parameter< const arma::vec& >::type param_ATMOS_nettoRadiat_wg3a(param_ATMOS_nettoRadiat_wg3aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type param_ATMOS_nettoRadiat_wg3b(param_ATMOS_nettoRadiat_wg3bSEXP);
+    rcpp_result_gen = Rcpp::wrap(meteo_nettoLongRadiat_WaterGAP3(ATMOS_temperature_Cel, ATMOS_solarRadiat_MJ, ATMOS_solarRadiatClearSky_MJ, param_ATMOS_nettoRadiat_wg3a, param_ATMOS_nettoRadiat_wg3b));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _HydroGallery_meteo_nettoRadiat_WaterGAP3(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_solarRadiatClearSky_MJSEXP, SEXP LAND_albedo_1SEXP) {
+RcppExport SEXP _HydroGallery_meteo_nettoLongRadiat_WaterGAP3(SEXP ATMOS_temperature_CelSEXP, SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_solarRadiatClearSky_MJSEXP, SEXP param_ATMOS_nettoRadiat_wg3aSEXP, SEXP param_ATMOS_nettoRadiat_wg3bSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_HydroGallery_meteo_nettoRadiat_WaterGAP3_try(ATMOS_temperature_CelSEXP, ATMOS_solarRadiat_MJSEXP, ATMOS_solarRadiatClearSky_MJSEXP, LAND_albedo_1SEXP));
+        rcpp_result_gen = PROTECT(_HydroGallery_meteo_nettoLongRadiat_WaterGAP3_try(ATMOS_temperature_CelSEXP, ATMOS_solarRadiat_MJSEXP, ATMOS_solarRadiatClearSky_MJSEXP, param_ATMOS_nettoRadiat_wg3aSEXP, param_ATMOS_nettoRadiat_wg3bSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// meteo_nettoRadiat_WaterGAP3
+arma::vec meteo_nettoRadiat_WaterGAP3(const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_nettoLongRadiat_MJ, const arma::vec& LAND_albedo_1);
+static SEXP _HydroGallery_meteo_nettoRadiat_WaterGAP3_try(SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_nettoLongRadiat_MJSEXP, SEXP LAND_albedo_1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type ATMOS_solarRadiat_MJ(ATMOS_solarRadiat_MJSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type ATMOS_nettoLongRadiat_MJ(ATMOS_nettoLongRadiat_MJSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type LAND_albedo_1(LAND_albedo_1SEXP);
+    rcpp_result_gen = Rcpp::wrap(meteo_nettoRadiat_WaterGAP3(ATMOS_solarRadiat_MJ, ATMOS_nettoLongRadiat_MJ, LAND_albedo_1));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _HydroGallery_meteo_nettoRadiat_WaterGAP3(SEXP ATMOS_solarRadiat_MJSEXP, SEXP ATMOS_nettoLongRadiat_MJSEXP, SEXP LAND_albedo_1SEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_HydroGallery_meteo_nettoRadiat_WaterGAP3_try(ATMOS_solarRadiat_MJSEXP, ATMOS_nettoLongRadiat_MJSEXP, LAND_albedo_1SEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -3993,8 +4030,8 @@ static int _HydroGallery_RcppExport_validate(const char* sig) {
         signatures.insert("arma::vec(*lateral_GR4Jfix)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*lateral_ThreshPow)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*lateral_Arno)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
-        signatures.insert("arma::vec(*meteo_extraterreSolarRadiat_FAO56)(const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_solarRadiatClearSky_FAO56)(const arma::vec&,const arma::vec&,const arma::vec&)");
+        signatures.insert("arma::vec(*meteo_solarRadiatClearSky_WaterGAP3)(const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_saturatVaporPress)(const arma::vec&)");
         signatures.insert("arma::vec(*meteo_saturatVaporPress_kPa)(const arma::vec&)");
         signatures.insert("arma::vec(*meteo_vaporPress)(const arma::vec&,const arma::vec&)");
@@ -4003,7 +4040,8 @@ static int _HydroGallery_RcppExport_validate(const char* sig) {
         signatures.insert("arma::vec(*meteo_cloudFactor_UNKNOW)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_atmosEmissivity_UNKNOW)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_atmosEmissivity_Idso)(const arma::vec&)");
-        signatures.insert("arma::vec(*meteo_nettoRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
+        signatures.insert("arma::vec(*meteo_nettoLongRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
+        signatures.insert("arma::vec(*meteo_nettoRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_nettoRadiat_FAO56Simplify)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_windSpeed2m)(const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*meteo_airDensity)(const arma::vec&,const arma::vec&)");
@@ -4106,8 +4144,8 @@ RcppExport SEXP _HydroGallery_RcppExport_registerCCallable() {
     R_RegisterCCallable("HydroGallery", "_HydroGallery_lateral_GR4Jfix", (DL_FUNC)_HydroGallery_lateral_GR4Jfix_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_lateral_ThreshPow", (DL_FUNC)_HydroGallery_lateral_ThreshPow_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_lateral_Arno", (DL_FUNC)_HydroGallery_lateral_Arno_try);
-    R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_extraterreSolarRadiat_FAO56", (DL_FUNC)_HydroGallery_meteo_extraterreSolarRadiat_FAO56_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_solarRadiatClearSky_FAO56", (DL_FUNC)_HydroGallery_meteo_solarRadiatClearSky_FAO56_try);
+    R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3", (DL_FUNC)_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_saturatVaporPress", (DL_FUNC)_HydroGallery_meteo_saturatVaporPress_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_saturatVaporPress_kPa", (DL_FUNC)_HydroGallery_meteo_saturatVaporPress_kPa_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_vaporPress", (DL_FUNC)_HydroGallery_meteo_vaporPress_try);
@@ -4116,6 +4154,7 @@ RcppExport SEXP _HydroGallery_RcppExport_registerCCallable() {
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_cloudFactor_UNKNOW", (DL_FUNC)_HydroGallery_meteo_cloudFactor_UNKNOW_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_atmosEmissivity_UNKNOW", (DL_FUNC)_HydroGallery_meteo_atmosEmissivity_UNKNOW_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_atmosEmissivity_Idso", (DL_FUNC)_HydroGallery_meteo_atmosEmissivity_Idso_try);
+    R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_nettoLongRadiat_WaterGAP3", (DL_FUNC)_HydroGallery_meteo_nettoLongRadiat_WaterGAP3_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_nettoRadiat_WaterGAP3", (DL_FUNC)_HydroGallery_meteo_nettoRadiat_WaterGAP3_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_nettoRadiat_FAO56Simplify", (DL_FUNC)_HydroGallery_meteo_nettoRadiat_FAO56Simplify_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_meteo_windSpeed2m", (DL_FUNC)_HydroGallery_meteo_windSpeed2m_try);
@@ -4218,8 +4257,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HydroGallery_lateral_GR4Jfix", (DL_FUNC) &_HydroGallery_lateral_GR4Jfix, 4},
     {"_HydroGallery_lateral_ThreshPow", (DL_FUNC) &_HydroGallery_lateral_ThreshPow, 5},
     {"_HydroGallery_lateral_Arno", (DL_FUNC) &_HydroGallery_lateral_Arno, 5},
-    {"_HydroGallery_meteo_extraterreSolarRadiat_FAO56", (DL_FUNC) &_HydroGallery_meteo_extraterreSolarRadiat_FAO56, 2},
     {"_HydroGallery_meteo_solarRadiatClearSky_FAO56", (DL_FUNC) &_HydroGallery_meteo_solarRadiatClearSky_FAO56, 3},
+    {"_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3", (DL_FUNC) &_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3, 2},
     {"_HydroGallery_meteo_saturatVaporPress", (DL_FUNC) &_HydroGallery_meteo_saturatVaporPress, 1},
     {"_HydroGallery_meteo_saturatVaporPress_kPa", (DL_FUNC) &_HydroGallery_meteo_saturatVaporPress_kPa, 1},
     {"_HydroGallery_meteo_vaporPress", (DL_FUNC) &_HydroGallery_meteo_vaporPress, 2},
@@ -4228,7 +4267,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HydroGallery_meteo_cloudFactor_UNKNOW", (DL_FUNC) &_HydroGallery_meteo_cloudFactor_UNKNOW, 4},
     {"_HydroGallery_meteo_atmosEmissivity_UNKNOW", (DL_FUNC) &_HydroGallery_meteo_atmosEmissivity_UNKNOW, 6},
     {"_HydroGallery_meteo_atmosEmissivity_Idso", (DL_FUNC) &_HydroGallery_meteo_atmosEmissivity_Idso, 1},
-    {"_HydroGallery_meteo_nettoRadiat_WaterGAP3", (DL_FUNC) &_HydroGallery_meteo_nettoRadiat_WaterGAP3, 4},
+    {"_HydroGallery_meteo_nettoLongRadiat_WaterGAP3", (DL_FUNC) &_HydroGallery_meteo_nettoLongRadiat_WaterGAP3, 5},
+    {"_HydroGallery_meteo_nettoRadiat_WaterGAP3", (DL_FUNC) &_HydroGallery_meteo_nettoRadiat_WaterGAP3, 3},
     {"_HydroGallery_meteo_nettoRadiat_FAO56Simplify", (DL_FUNC) &_HydroGallery_meteo_nettoRadiat_FAO56Simplify, 6},
     {"_HydroGallery_meteo_windSpeed2m", (DL_FUNC) &_HydroGallery_meteo_windSpeed2m, 2},
     {"_HydroGallery_meteo_airDensity", (DL_FUNC) &_HydroGallery_meteo_airDensity, 2},

@@ -6,24 +6,6 @@
 //' some functions to calculate the meteological variables
 //' @inheritParams all_vari
 //' @name meteo
-//' @export
-// [[Rcpp::export]]
-arma::vec meteo_extraterreSolarRadiat_FAO56(
-   const arma::vec& Time_dayOfYear_,
-   const arma::vec& LAND_latitude_Degree) {
-  
-  arma::vec phi_ = M_PI / 180 * LAND_latitude_Degree; //eq22
-  arma::vec d_r = 1 + 0.033 * cos(2 * M_PI / 365 * Time_dayOfYear_); // eq23
-  arma::vec delta_ = 0.409 * sin(2 * M_PI / 365 * Time_dayOfYear_ - 1.39); // 24
-  arma::vec omega_s_TEMP = arma::clamp(-tan(phi_) % tan(delta_), -1, 1);
-  arma::vec omega_s = acos(omega_s_TEMP); //25
-  arma::vec R_a = 37.58603 * d_r % (omega_s % sin(phi_) % sin(delta_) + cos(phi_) % cos(delta_) % sin(omega_s)); //21
-  
-  R_a.elem(arma::find(R_a < 0)).zeros();  // Sets negative values to 0
-  return R_a;
-}
-
-//' @rdname meteo
 //' @return meteological variables
 //' @export
 // [[Rcpp::export]]
@@ -32,9 +14,53 @@ arma::vec meteo_solarRadiatClearSky_FAO56(
    const arma::vec& LAND_latitude_Degree,
    const arma::vec& LAND_elevation_m) {
  
-  arma::vec R_a = meteo_extraterreSolarRadiat_FAO56(Time_dayOfYear_, LAND_latitude_Degree); //21
+ arma::vec phi_ = M_PI / 180 * LAND_latitude_Degree; //eq22
+  arma::vec d_r = 1 + 0.033 * cos(2 * M_PI / 365 * Time_dayOfYear_); // eq23
+  arma::vec delta_ = 0.409 * sin(2 * M_PI / 365 * Time_dayOfYear_ - 1.39); // 24
+  arma::vec omega_s_TEMP = arma::clamp(-tan(phi_) % tan(delta_), -1, 1);
+  arma::vec omega_s = acos(omega_s_TEMP); //25
+  arma::vec R_a = 37.58603 * d_r % (omega_s % sin(phi_) % sin(delta_) + cos(phi_) % cos(delta_) % sin(omega_s)); //21
+  R_a.transform([](double val) { return std::max(val, 0.0); });  // enforce non-negative
   arma::vec R_so = (0.75 + 2e-5 * LAND_elevation_m) % R_a; // eq37
  
+  return R_so;
+}
+
+//' @rdname meteo
+//' @export
+// [[Rcpp::export]]
+arma::vec meteo_solarRadiatClearSky_WaterGAP3(
+  const arma::vec& Time_dayOfYear_,
+  const arma::vec& LAND_latitude_Degree
+) {
+
+  // 1. Solar declination angle (radians) - Kaspar method
+  arma::vec delta_ = arma::asin(
+    0.39795 * arma::cos(0.2163108 + 2.0 * arma::atan(0.9671396 * arma::tan(0.00860 * (Time_dayOfYear_ - 186.0))))
+  );
+
+  // 2. Latitude in radians (standard conversion, no grid correction)
+  arma::vec theta = LAND_latitude_Degree * M_PI / 180.0;
+
+  // 3. Sunset hour angle omega_s (Kaspar convention)
+  arma::vec omega_temp = arma::sin(theta) % arma::sin(delta_) /
+                         (arma::cos(theta) % arma::cos(delta_));
+
+  omega_temp = arma::clamp(omega_temp, -1.0, 1.0); // domain-safe for acos
+  arma::vec omega_s = M_PI - arma::acos(omega_temp);  // Kaspar convention
+
+  // 4. Relative distance Earth-Sun
+  arma::vec d_r = 1.0 + 0.033 * arma::cos(2.0 * M_PI / 365.0 * Time_dayOfYear_);
+
+  // 5. Extraterrestrial radiation in MJ/m²/day
+  arma::vec R_a = 15.392 * 2.478 * d_r % ( // 2.478 convert unit from mm into MJ/m2
+    omega_s % arma::sin(theta) % arma::sin(delta_) +
+    arma::cos(theta) % arma::cos(delta_) % arma::sin(omega_s)
+  );
+
+  R_a.transform([](double val) { return std::max(val, 0.0); });  // enforce non-negative
+  arma::vec R_so = 0.75 * R_a; // eq37
+
   return R_so;
 }
 
@@ -170,38 +196,50 @@ arma::vec meteo_atmosEmissivity_UNKNOW(
 //' @export
 // [[Rcpp::export]]
 arma::vec meteo_atmosEmissivity_Idso(const arma::vec& ATMOS_temperature_Cel) {
-    arma::vec epsilon_a = 0.261 * arma::exp(-0.000777 * arma::pow(ATMOS_temperature_Cel, 2)) - 0.02;
-    return arma::clamp(epsilon_a, 0.0, 1.0);
+    arma::vec epsilon_a = 0.261 * arma::exp(-0.000777 * (ATMOS_temperature_Cel % ATMOS_temperature_Cel)) - 0.02;
+    return epsilon_a;
 }
+
 
 //' @rdname meteo
 //' @export
 // [[Rcpp::export]]
-arma::vec meteo_nettoRadiat_WaterGAP3(
+arma::vec meteo_nettoLongRadiat_WaterGAP3(
    const arma::vec& ATMOS_temperature_Cel,
    const arma::vec& ATMOS_solarRadiat_MJ,
    const arma::vec& ATMOS_solarRadiatClearSky_MJ,
-   const arma::vec& LAND_albedo_1) {
+   const arma::vec& param_ATMOS_nettoRadiat_wg3a,
+   const arma::vec& param_ATMOS_nettoRadiat_wg3b) {
  
  const double sigma_ = 4.903e-09;
  
- arma::vec R_ns = (1 - LAND_albedo_1) % ATMOS_solarRadiat_MJ;
  arma::vec epsilon_a = meteo_atmosEmissivity_Idso(ATMOS_temperature_Cel);
  arma::vec factor_Cloud = ATMOS_solarRadiat_MJ / ATMOS_solarRadiatClearSky_MJ;
  factor_Cloud.elem(arma::find(ATMOS_solarRadiatClearSky_MJ == 0)).zeros();
  factor_Cloud.transform([](double val) { return std::min(val, 1.0); });
 
  arma::vec ATMOS_temperature_T = ATMOS_temperature_Cel + 273.16;
- arma::vec factor_Cloud_Rnl = 1.35 * factor_Cloud - 0.35;
+ arma::vec factor_Cloud_Rnl = param_ATMOS_nettoRadiat_wg3a % factor_Cloud - param_ATMOS_nettoRadiat_wg3b;
  factor_Cloud_Rnl.transform([](double val) { return std::max(val, 0.0); });
  
- 
- arma::vec R_nl = sigma_ * arma::pow(ATMOS_temperature_T, 4) % epsilon_a % factor_Cloud_Rnl;
- R_nl = arma::clamp(R_nl, 0.0, arma::datum::inf); // R_nl > 0 if condition
- 
- arma::vec diff = R_ns - R_nl;
- diff.transform([](double val) { return std::max(val, 0.0); });
- return diff;
+ arma::vec R_nl = - sigma_ * arma::pow(ATMOS_temperature_T, 4) % epsilon_a % factor_Cloud_Rnl;
+ // R_nl.transform([](double val) { return std::max(val, 0.0); });
+ return R_nl;
+}
+
+
+//' @rdname meteo
+//' @export
+// [[Rcpp::export]]
+arma::vec meteo_nettoRadiat_WaterGAP3(
+   const arma::vec& ATMOS_solarRadiat_MJ,
+   const arma::vec& ATMOS_nettoLongRadiat_MJ,
+   const arma::vec& LAND_albedo_1) {
+
+ arma::vec R_ns = (1 - LAND_albedo_1) % ATMOS_solarRadiat_MJ;
+ arma::vec R_n = R_ns + ATMOS_nettoLongRadiat_MJ;
+ R_n.transform([](double val) { return std::max(val, 0.0); });
+ return R_n;
 }
 
 //' @rdname meteo

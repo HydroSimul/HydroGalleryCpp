@@ -158,7 +158,7 @@ arma::field<arma::uvec> get_step_extra_cell(
 {
   arma::field<arma::uvec> Step_Extra_cellNumber_int(Step_cellNumber_int.n_elem);
   
-  for (arma::uword i = 0; i < Step_cellNumber_int.n_elem; ++i) {
+  for (int i = 0; i < Step_cellNumber_int.n_elem; ++i) {
     const arma::uvec& step_cells = Step_cellNumber_int(i);
     // Get 1-based indices of matches
     Step_Extra_cellNumber_int(i) = get_extra_in_step(step_cells, Extra_cellNumber_int); // +1 for 1-based indexing

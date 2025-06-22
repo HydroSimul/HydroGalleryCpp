@@ -131,9 +131,9 @@ arma::vec evatransPotential_PriestleyTaylor(
   Delta_ = 4098 * (0.6108 * exp(17.27 * ATMOS_temperature_Cel / (ATMOS_temperature_Cel + 237.3))) / ((ATMOS_temperature_Cel + 237.3) % (ATMOS_temperature_Cel + 237.3));
 
   P_ = 101.3 * pow(((293 - 0.0065 * LAND_elevation_m) / 293), 5.26);
-  gamma_ = 0.665e-3 * P_;
+  gamma_ = 0.0016286 * P_ / lat_heat;// 0.665e-3 * P_;
 
-  ET_o = param_EVATRANS_prt_alpha % Delta_ % (ATMOS_netRadiat_MJ - 0.) / (Delta_ + gamma_);
+  ET_o = param_EVATRANS_prt_alpha % Delta_ % (ATMOS_netRadiat_MJ - 0.) / (Delta_ + gamma_); // ????? Delta_ + gamma_
   ET_o /= lat_heat;  // Element-wise division (if lat_heat is scalar or same-sized)
   ET_o.transform([](double val) { return std::max(val, 0.0); });
   return ET_o;

@@ -1285,27 +1285,6 @@ namespace HydroGallery {
         return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
-    inline arma::vec meteo_extraterreSolarRadiat_FAO56(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree) {
-        typedef SEXP(*Ptr_meteo_extraterreSolarRadiat_FAO56)(SEXP,SEXP);
-        static Ptr_meteo_extraterreSolarRadiat_FAO56 p_meteo_extraterreSolarRadiat_FAO56 = NULL;
-        if (p_meteo_extraterreSolarRadiat_FAO56 == NULL) {
-            validateSignature("arma::vec(*meteo_extraterreSolarRadiat_FAO56)(const arma::vec&,const arma::vec&)");
-            p_meteo_extraterreSolarRadiat_FAO56 = (Ptr_meteo_extraterreSolarRadiat_FAO56)R_GetCCallable("HydroGallery", "_HydroGallery_meteo_extraterreSolarRadiat_FAO56");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_meteo_extraterreSolarRadiat_FAO56(Shield<SEXP>(Rcpp::wrap(Time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(LAND_latitude_Degree)));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
-            throw Rcpp::LongjumpException(rcpp_result_gen);
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<arma::vec >(rcpp_result_gen);
-    }
-
     inline arma::vec meteo_solarRadiatClearSky_FAO56(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree, const arma::vec& LAND_elevation_m) {
         typedef SEXP(*Ptr_meteo_solarRadiatClearSky_FAO56)(SEXP,SEXP,SEXP);
         static Ptr_meteo_solarRadiatClearSky_FAO56 p_meteo_solarRadiatClearSky_FAO56 = NULL;
@@ -1317,6 +1296,27 @@ namespace HydroGallery {
         {
             RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_meteo_solarRadiatClearSky_FAO56(Shield<SEXP>(Rcpp::wrap(Time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(LAND_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(LAND_elevation_m)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
+    }
+
+    inline arma::vec meteo_solarRadiatClearSky_WaterGAP3(const arma::vec& Time_dayOfYear_, const arma::vec& LAND_latitude_Degree) {
+        typedef SEXP(*Ptr_meteo_solarRadiatClearSky_WaterGAP3)(SEXP,SEXP);
+        static Ptr_meteo_solarRadiatClearSky_WaterGAP3 p_meteo_solarRadiatClearSky_WaterGAP3 = NULL;
+        if (p_meteo_solarRadiatClearSky_WaterGAP3 == NULL) {
+            validateSignature("arma::vec(*meteo_solarRadiatClearSky_WaterGAP3)(const arma::vec&,const arma::vec&)");
+            p_meteo_solarRadiatClearSky_WaterGAP3 = (Ptr_meteo_solarRadiatClearSky_WaterGAP3)R_GetCCallable("HydroGallery", "_HydroGallery_meteo_solarRadiatClearSky_WaterGAP3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_meteo_solarRadiatClearSky_WaterGAP3(Shield<SEXP>(Rcpp::wrap(Time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(LAND_latitude_Degree)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1495,17 +1495,38 @@ namespace HydroGallery {
         return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
-    inline arma::vec meteo_nettoRadiat_WaterGAP3(const arma::vec& ATMOS_temperature_Cel, const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_solarRadiatClearSky_MJ, const arma::vec& LAND_albedo_1) {
-        typedef SEXP(*Ptr_meteo_nettoRadiat_WaterGAP3)(SEXP,SEXP,SEXP,SEXP);
+    inline arma::vec meteo_nettoLongRadiat_WaterGAP3(const arma::vec& ATMOS_temperature_Cel, const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_solarRadiatClearSky_MJ, const arma::vec& param_ATMOS_nettoRadiat_wg3a, const arma::vec& param_ATMOS_nettoRadiat_wg3b) {
+        typedef SEXP(*Ptr_meteo_nettoLongRadiat_WaterGAP3)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_meteo_nettoLongRadiat_WaterGAP3 p_meteo_nettoLongRadiat_WaterGAP3 = NULL;
+        if (p_meteo_nettoLongRadiat_WaterGAP3 == NULL) {
+            validateSignature("arma::vec(*meteo_nettoLongRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
+            p_meteo_nettoLongRadiat_WaterGAP3 = (Ptr_meteo_nettoLongRadiat_WaterGAP3)R_GetCCallable("HydroGallery", "_HydroGallery_meteo_nettoLongRadiat_WaterGAP3");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_meteo_nettoLongRadiat_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ATMOS_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(ATMOS_solarRadiatClearSky_MJ)), Shield<SEXP>(Rcpp::wrap(param_ATMOS_nettoRadiat_wg3a)), Shield<SEXP>(Rcpp::wrap(param_ATMOS_nettoRadiat_wg3b)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<arma::vec >(rcpp_result_gen);
+    }
+
+    inline arma::vec meteo_nettoRadiat_WaterGAP3(const arma::vec& ATMOS_solarRadiat_MJ, const arma::vec& ATMOS_nettoLongRadiat_MJ, const arma::vec& LAND_albedo_1) {
+        typedef SEXP(*Ptr_meteo_nettoRadiat_WaterGAP3)(SEXP,SEXP,SEXP);
         static Ptr_meteo_nettoRadiat_WaterGAP3 p_meteo_nettoRadiat_WaterGAP3 = NULL;
         if (p_meteo_nettoRadiat_WaterGAP3 == NULL) {
-            validateSignature("arma::vec(*meteo_nettoRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
+            validateSignature("arma::vec(*meteo_nettoRadiat_WaterGAP3)(const arma::vec&,const arma::vec&,const arma::vec&)");
             p_meteo_nettoRadiat_WaterGAP3 = (Ptr_meteo_nettoRadiat_WaterGAP3)R_GetCCallable("HydroGallery", "_HydroGallery_meteo_nettoRadiat_WaterGAP3");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_meteo_nettoRadiat_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ATMOS_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(ATMOS_solarRadiatClearSky_MJ)), Shield<SEXP>(Rcpp::wrap(LAND_albedo_1)));
+            rcpp_result_gen = p_meteo_nettoRadiat_WaterGAP3(Shield<SEXP>(Rcpp::wrap(ATMOS_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(ATMOS_nettoLongRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(LAND_albedo_1)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

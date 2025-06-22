@@ -2,8 +2,8 @@
 % Please edit documentation in R/RcppExports.R
 \name{meteo}
 \alias{meteo}
-\alias{meteo_extraterreSolarRadiat_FAO56}
 \alias{meteo_solarRadiatClearSky_FAO56}
+\alias{meteo_solarRadiatClearSky_WaterGAP3}
 \alias{meteo_saturatVaporPress}
 \alias{meteo_saturatVaporPress_kPa}
 \alias{meteo_vaporPress}
@@ -12,6 +12,7 @@
 \alias{meteo_cloudFactor_UNKNOW}
 \alias{meteo_atmosEmissivity_UNKNOW}
 \alias{meteo_atmosEmissivity_Idso}
+\alias{meteo_nettoLongRadiat_WaterGAP3}
 \alias{meteo_nettoRadiat_WaterGAP3}
 \alias{meteo_nettoRadiat_FAO56Simplify}
 \alias{meteo_windSpeed2m}
@@ -21,13 +22,13 @@
 \title{**meteological variables**
 some functions to calculate the meteological variables}
 \usage{
-meteo_extraterreSolarRadiat_FAO56(Time_dayOfYear_, LAND_latitude_Degree)
-
 meteo_solarRadiatClearSky_FAO56(
   Time_dayOfYear_,
   LAND_latitude_Degree,
   LAND_elevation_m
 )
+
+meteo_solarRadiatClearSky_WaterGAP3(Time_dayOfYear_, LAND_latitude_Degree)
 
 meteo_saturatVaporPress(ATMOS_temperature_Cel)
 
@@ -73,10 +74,17 @@ meteo_atmosEmissivity_UNKNOW(
 
 meteo_atmosEmissivity_Idso(ATMOS_temperature_Cel)
 
-meteo_nettoRadiat_WaterGAP3(
+meteo_nettoLongRadiat_WaterGAP3(
   ATMOS_temperature_Cel,
   ATMOS_solarRadiat_MJ,
   ATMOS_solarRadiatClearSky_MJ,
+  param_ATMOS_nettoRadiat_wg3a,
+  param_ATMOS_nettoRadiat_wg3b
+)
+
+meteo_nettoRadiat_WaterGAP3(
+  ATMOS_solarRadiat_MJ,
+  ATMOS_nettoLongRadiat_MJ,
   LAND_albedo_1
 )
 

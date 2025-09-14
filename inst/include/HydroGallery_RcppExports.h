@@ -487,6 +487,48 @@ namespace HydroGallery {
         return Rcpp::as<arma::vec >(rcpp_result_gen);
     }
 
+    inline double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs) {
+        typedef SEXP(*Ptr_evalute_NSE)(SEXP,SEXP);
+        static Ptr_evalute_NSE p_evalute_NSE = NULL;
+        if (p_evalute_NSE == NULL) {
+            validateSignature("double(*evalute_NSE)(arma::vec,arma::vec)");
+            p_evalute_NSE = (Ptr_evalute_NSE)R_GetCCallable("HydroGallery", "_HydroGallery_evalute_NSE");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_evalute_NSE(Shield<SEXP>(Rcpp::wrap(num_Sim)), Shield<SEXP>(Rcpp::wrap(num_Obs)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
+    inline double evalute_KGE(arma::vec num_Sim, arma::vec num_Obs, double factor_r = 1.0, double factor_alpha = 1.0, double factor_beta = 1.0) {
+        typedef SEXP(*Ptr_evalute_KGE)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evalute_KGE p_evalute_KGE = NULL;
+        if (p_evalute_KGE == NULL) {
+            validateSignature("double(*evalute_KGE)(arma::vec,arma::vec,double,double,double)");
+            p_evalute_KGE = (Ptr_evalute_KGE)R_GetCCallable("HydroGallery", "_HydroGallery_evalute_KGE");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_evalute_KGE(Shield<SEXP>(Rcpp::wrap(num_Sim)), Shield<SEXP>(Rcpp::wrap(num_Obs)), Shield<SEXP>(Rcpp::wrap(factor_r)), Shield<SEXP>(Rcpp::wrap(factor_alpha)), Shield<SEXP>(Rcpp::wrap(factor_beta)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<double >(rcpp_result_gen);
+    }
+
     inline arma::vec evatransActual_SupplyRatio(const arma::vec& ATMOS_potentialEvatrans_mm, const arma::vec& water_mm, const arma::vec& capacity_mm, const arma::vec& param_EVATRANS_sur_k) {
         typedef SEXP(*Ptr_evatransActual_SupplyRatio)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransActual_SupplyRatio p_evatransActual_SupplyRatio = NULL;

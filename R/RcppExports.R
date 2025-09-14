@@ -207,6 +207,24 @@ baseflow_Arno <- function(GROUND_water_mm, GROUND_capacity_mm, GROUND_potentialB
     .Call(`_HydroGallery_baseflow_Arno`, GROUND_water_mm, GROUND_capacity_mm, GROUND_potentialBaseflow_mm, param_BASEFLOW_arn_thresh, param_BASEFLOW_arn_k)
 }
 
+#' Calibrate
+#' This function implements a calibration algorithm based on the Direct Search method (DDS).
+#'
+#' It attempts to find the optimal parameter values that minimize the given objective (fitness) function.
+#'
+#' @name calibrate
+#' @param fitness An Rcpp-exported C++ function (callable from R and C++) that accepts (x, other_data) and returns arma::vec (first element is objective).
+#' @param lst_OtherData A field of additional data passed to `fitness`.
+#' @param x_Min A numeric vector of lower bounds for each parameter.
+#' @param x_Max A numeric vector of upper bounds for each parameter.
+#' @param x_Init An optional initial solution (numeric vector). If empty, midpoint of x_Min and x_Max is used.
+#' @param max_iter Maximum iterations (default 100).
+#' @param r Perturbation factor (default 0.2).
+#'
+#' @return arma::vec: best parameter set found.
+#'
+NULL
+
 #' **potential evapotranspiration**
 #' @name evatransPotential
 #' @description 
@@ -451,6 +469,23 @@ confluenIUH_Nash <- function(CONFLUEN_responseTime_TS, param_CONFLUEN_nas_n) {
 #' @export
 confluenIUH_Clark <- function(CONFLUEN_responseTime_TS) {
     .Call(`_HydroGallery_confluenIUH_Clark`, CONFLUEN_responseTime_TS)
+}
+
+#' Evaluate metrics
+#' @name evaluate
+#' @param num_Sim A numeric vector of simulated values.
+#' @param num_Obs A numeric vector of observed values. NA values are removed along with corresponding values in num_Sim.
+#' @return A double representing the Evaluate metrics.
+#' @export
+evalute_NSE <- function(num_Sim, num_Obs) {
+    .Call(`_HydroGallery_evalute_NSE`, num_Sim, num_Obs)
+}
+
+#' @rdname evaluate
+#' @param factor_r,factor_alpha,factor_beta A double specifying the weight for the correlation term (r - 1), (alpha - 1) and (beta - 1). Default is 1.0.
+#' @export
+evalute_KGE <- function(num_Sim, num_Obs, factor_r = 1.0, factor_alpha = 1.0, factor_beta = 1.0) {
+    .Call(`_HydroGallery_evalute_KGE`, num_Sim, num_Obs, factor_r, factor_alpha, factor_beta)
 }
 
 #' **actuall evapotranspiration**

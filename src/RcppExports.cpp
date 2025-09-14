@@ -816,6 +816,79 @@ RcppExport SEXP _HydroGallery_confluenIUH_Clark(SEXP CONFLUEN_responseTime_TSSEX
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// evalute_NSE
+double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs);
+static SEXP _HydroGallery_evalute_NSE_try(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type num_Sim(num_SimSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type num_Obs(num_ObsSEXP);
+    rcpp_result_gen = Rcpp::wrap(evalute_NSE(num_Sim, num_Obs));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _HydroGallery_evalute_NSE(SEXP num_SimSEXP, SEXP num_ObsSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_HydroGallery_evalute_NSE_try(num_SimSEXP, num_ObsSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// evalute_KGE
+double evalute_KGE(arma::vec num_Sim, arma::vec num_Obs, double factor_r, double factor_alpha, double factor_beta);
+static SEXP _HydroGallery_evalute_KGE_try(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type num_Sim(num_SimSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type num_Obs(num_ObsSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_r(factor_rSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_alpha(factor_alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type factor_beta(factor_betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(evalute_KGE(num_Sim, num_Obs, factor_r, factor_alpha, factor_beta));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _HydroGallery_evalute_KGE(SEXP num_SimSEXP, SEXP num_ObsSEXP, SEXP factor_rSEXP, SEXP factor_alphaSEXP, SEXP factor_betaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_HydroGallery_evalute_KGE_try(num_SimSEXP, num_ObsSEXP, factor_rSEXP, factor_alphaSEXP, factor_betaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // evatransActual_SupplyRatio
 arma::vec evatransActual_SupplyRatio(const arma::vec& ATMOS_potentialEvatrans_mm, const arma::vec& water_mm, const arma::vec& capacity_mm, const arma::vec& param_EVATRANS_sur_k);
 static SEXP _HydroGallery_evatransActual_SupplyRatio_try(SEXP ATMOS_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_EVATRANS_sur_kSEXP) {
@@ -3992,6 +4065,8 @@ static int _HydroGallery_RcppExport_validate(const char* sig) {
         signatures.insert("arma::vec(*confluenIUH_Kelly)(double,double)");
         signatures.insert("arma::vec(*confluenIUH_Nash)(double,double)");
         signatures.insert("arma::vec(*confluenIUH_Clark)(double)");
+        signatures.insert("double(*evalute_NSE)(arma::vec,arma::vec)");
+        signatures.insert("double(*evalute_KGE)(arma::vec,arma::vec,double,double,double)");
         signatures.insert("arma::vec(*evatransActual_SupplyRatio)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*evatransActual_SupplyPow)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
         signatures.insert("arma::vec(*evatransActual_VIC)(const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&)");
@@ -4106,6 +4181,8 @@ RcppExport SEXP _HydroGallery_RcppExport_registerCCallable() {
     R_RegisterCCallable("HydroGallery", "_HydroGallery_confluenIUH_Kelly", (DL_FUNC)_HydroGallery_confluenIUH_Kelly_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_confluenIUH_Nash", (DL_FUNC)_HydroGallery_confluenIUH_Nash_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_confluenIUH_Clark", (DL_FUNC)_HydroGallery_confluenIUH_Clark_try);
+    R_RegisterCCallable("HydroGallery", "_HydroGallery_evalute_NSE", (DL_FUNC)_HydroGallery_evalute_NSE_try);
+    R_RegisterCCallable("HydroGallery", "_HydroGallery_evalute_KGE", (DL_FUNC)_HydroGallery_evalute_KGE_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_evatransActual_SupplyRatio", (DL_FUNC)_HydroGallery_evatransActual_SupplyRatio_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_evatransActual_SupplyPow", (DL_FUNC)_HydroGallery_evatransActual_SupplyPow_try);
     R_RegisterCCallable("HydroGallery", "_HydroGallery_evatransActual_VIC", (DL_FUNC)_HydroGallery_evatransActual_VIC_try);
@@ -4219,6 +4296,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_HydroGallery_confluenIUH_Kelly", (DL_FUNC) &_HydroGallery_confluenIUH_Kelly, 2},
     {"_HydroGallery_confluenIUH_Nash", (DL_FUNC) &_HydroGallery_confluenIUH_Nash, 2},
     {"_HydroGallery_confluenIUH_Clark", (DL_FUNC) &_HydroGallery_confluenIUH_Clark, 1},
+    {"_HydroGallery_evalute_NSE", (DL_FUNC) &_HydroGallery_evalute_NSE, 2},
+    {"_HydroGallery_evalute_KGE", (DL_FUNC) &_HydroGallery_evalute_KGE, 5},
     {"_HydroGallery_evatransActual_SupplyRatio", (DL_FUNC) &_HydroGallery_evatransActual_SupplyRatio, 4},
     {"_HydroGallery_evatransActual_SupplyPow", (DL_FUNC) &_HydroGallery_evatransActual_SupplyPow, 5},
     {"_HydroGallery_evatransActual_VIC", (DL_FUNC) &_HydroGallery_evatransActual_VIC, 4},

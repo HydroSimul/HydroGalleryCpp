@@ -10,8 +10,7 @@ License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.7), 
   mathjaxr, Rdpack,
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 RdMacros: mathjaxr, Rdpack
 SystemRequirements: netcdf library version 4.1 or later
-

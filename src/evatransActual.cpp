@@ -107,7 +107,9 @@ arma::vec evatransActual_VIC(
     const arma::vec& param_EVATRANS_vic_gamma
 )
 {
-  arma::vec AET = ATMOS_potentialEvatrans_mm % (1 - arma::pow(1 - water_mm / capacity_mm, param_EVATRANS_vic_gamma));
+  arma::vec AET = ATMOS_potentialEvatrans_mm % 
+    (1 - arma::pow(1 - arma::clamp(water_mm / capacity_mm, 0.0, 0.999), 
+                   param_EVATRANS_vic_gamma));
   return arma::min(AET, water_mm);
 }
 

@@ -281,7 +281,7 @@ arma::uvec get_new_outflow(const arma::uvec& int_Cell, const arma::uvec& int_Out
   for (arma::uword i = 0; i < n; ++i) {
     arma::uword id = int_Cell[i];
     arma::uword next = int_Outflow[id - 1];
-    result[i] = old_to_new.count(next) ? old_to_new[next] : id;
+    result[i] = old_to_new.count(next) ? old_to_new[next] : 0;
   }
 
   return arma::conv_to<arma::uvec>::from(result);

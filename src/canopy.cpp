@@ -11,7 +11,6 @@
 //' \insertAllCited{}
 //' @inheritParams all_vari
 //' @export
-// [[Rcpp::export]]
 arma::mat landLeafAreaIndex_WaterGAP3(const arma::mat& ATMOS_temperature_Cel,
                                       const arma::mat& ATMOS_precipitation_mm,
                                       const arma::vec& CELL_latitude_deg,

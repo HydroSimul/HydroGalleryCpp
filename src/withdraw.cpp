@@ -13,7 +13,6 @@
 //'   This will be updated to reflect remaining water after withdrawal.
 //' @return None. Parameters are updated by reference.
 //' @export
-// [[Rcpp::export]]
 void withdraw_SingleCell(arma::vec& CELL_withdrawal_m3,
                          arma::vec& CELL_water_m3) {
 
@@ -28,7 +27,6 @@ void withdraw_SingleCell(arma::vec& CELL_withdrawal_m3,
 //' @rdname withdraw
 //' @param CELL_cellNumberAround_int Matrix of cell indices that define surrounding cells.
 //' @export
-// [[Rcpp::export]]
 void withdrawSurface_AroundMax(arma::vec& CELL_withdrawal_m3,
                                arma::vec& RIVER_water_m3,
                                arma::vec& Lake_water_m3,
@@ -77,7 +75,6 @@ void withdrawSurface_AroundMax(arma::vec& CELL_withdrawal_m3,
 //' based on their water availability.
 //' @rdname withdraw
 //' @export
-// [[Rcpp::export]]
 void withdrawSurface_Around(arma::vec& CELL_withdrawal_m3,
                             arma::vec& RIVER_water_m3,
                             const arma::uvec& Lake_cellNumber_int,
@@ -152,7 +149,6 @@ void withdrawSurface_Around(arma::vec& CELL_withdrawal_m3,
 //' @name withdraw
 //' @param CELL_cellNumberWithdrawNet_int Matrix defining the withdrawal network.
 //' @export
-// [[Rcpp::export]]
 void withdrawSurface_WithdrawNet(arma::vec& CELL_withdrawal_m3,
                                  arma::vec& RIVER_water_m3,
                                  arma::vec& Lake_water_m3,

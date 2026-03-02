@@ -12,7 +12,6 @@
 //' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.
 //' @return A field of uvecs containing the inflow cells for each cell.
 //' @export
-// [[Rcpp::export]]
 arma::field<arma::uvec> get_inflow_cells(const arma::uvec& int_Outflow) {
   int n = int_Outflow.n_elem;
   std::vector<std::vector<arma::uword>> temp(n);
@@ -40,7 +39,6 @@ arma::field<arma::uvec> get_inflow_cells(const arma::uvec& int_Outflow) {
 //' @title Get Inflow Last Cell Matrix
 //' @description Creates a matrix of inflow cells for each cell.
 //' @export
-// [[Rcpp::export]]
 arma::umat get_inflow_lastcell(const arma::uvec& int_Outflow) {
   const arma::uword n = int_Outflow.n_elem;
   std::vector<std::vector<arma::uword>> lst_Inflow_LastCell(n);
@@ -67,7 +65,6 @@ arma::umat get_inflow_lastcell(const arma::uvec& int_Outflow) {
 //' @rdname routingtopology
 //' @description Creates a list of inflow cells for each step.
 //' @export
-// [[Rcpp::export]]
 arma::field<arma::uvec> get_step_cells(const arma::field<arma::uvec>& inflow_cells) {
   int n = inflow_cells.n_elem;
   arma::uvec lengths(n);
@@ -96,7 +93,6 @@ arma::field<arma::uvec> get_step_cells(const arma::field<arma::uvec>& inflow_cel
 //' @rdname routingtopology
 //' @description Creates a field of last cells for each step.
 //' @export
-// [[Rcpp::export]]
 arma::field<arma::umat> get_step_lastcell(const arma::field<arma::uvec>& step_cells,
                                          const arma::umat& inflow_lastcell) {
   arma::field<arma::umat> result(step_cells.n_elem);
@@ -118,7 +114,6 @@ arma::field<arma::umat> get_step_lastcell(const arma::field<arma::uvec>& step_ce
 //'
 //' @return NULL (invisible)
 //' @export
-// [[Rcpp::export]]
 void generate_step_cell(const arma::uvec& int_Outflow,
                                      const std::string& fn_Step_Cell,
                                      const std::string& fn_Step_LastCell) {
@@ -151,7 +146,6 @@ arma::uvec get_extra_in_step(const arma::uvec& Step_Cell, const arma::uvec& Extr
 //' @param Step_cellNumber_int Cell number of the step.
 //' @param Extra_cellNumber_int Cell number of the extra cells.
 //' @export
-// [[Rcpp::export]]
 arma::field<arma::uvec> get_step_extra_cell(
     const arma::field<arma::uvec>& Step_cellNumber_int,
     const arma::uvec& Extra_cellNumber_int) 
@@ -174,7 +168,6 @@ arma::field<arma::uvec> get_step_extra_cell(
 //' @param fn_Step_Extra_Cell path to write the step extra cell number.
 //' @return NULL (invisible)
 //' @export
-// [[Rcpp::export]]
 void generate_step_extra_cell(const std::string& fn_Step_Cell,
                               const std::string& fn_Extra_Cell,
                               const std::string& fn_Step_Extra_Cell) {
@@ -219,7 +212,6 @@ void generate_step_extra_cell(const std::string& fn_Step_Cell,
 //' @param int_TestCell An integer vector, cells to test.
 //' @return An integer vector of cells in the intersection of the station cells and the basin.
 //' @export
-// [[Rcpp::export]]
 arma::uvec get_cell_in_basin(const arma::field<arma::uvec>& lst_Inflow_Cell,
                               int int_OutLet, const arma::uvec& int_TestCell) {
   arma::uvec int_BigBasin = lst_Inflow_Cell(int_OutLet - 1);
@@ -250,7 +242,6 @@ arma::uvec get_cell_in_basin(const arma::field<arma::uvec>& lst_Inflow_Cell,
 //' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
 //' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
 //' @export
-// [[Rcpp::export]]
 arma::uvec get_inter_basin(const arma::uvec& int_Cell, const arma::uvec& int_Outflow) {
   int n = int_Cell.n_elem;
   arma::ivec out(n, arma::fill::value(NA_INTEGER));
@@ -269,7 +260,6 @@ arma::uvec get_inter_basin(const arma::uvec& int_Cell, const arma::uvec& int_Out
 //' @param int_CellNew An integer vector representing the cells within the new basin.
 //' @return An integer vector of the new outflow indices adjusted for the sub-basin.
 //' @export
-// [[Rcpp::export]]
 arma::uvec get_new_outflow(const arma::uvec& int_Cell, const arma::uvec& int_Outflow) {
   int n = int_Cell.n_elem;
   arma::ivec result(n, arma::fill::value(NA_INTEGER));
@@ -291,7 +281,6 @@ arma::uvec get_new_outflow(const arma::uvec& int_Cell, const arma::uvec& int_Out
 //' @param int_CaliCell An integer vector of calibration cells.
 //' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 //' @export
-// [[Rcpp::export]]
 arma::uvec get_cali_step(const arma::field<arma::uvec>& step_cells,
                          const arma::uvec& int_Cali) {
   std::vector<arma::uword> steps;
@@ -309,7 +298,6 @@ arma::uvec get_cali_step(const arma::field<arma::uvec>& step_cells,
 //' @rdname routingtopology
 //' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 //' @export
-// [[Rcpp::export]]
 arma::field<arma::uvec> get_upstream_cali_cell(const arma::field<arma::uvec>& lst_Inflow_Cell,
                                                const arma::uvec& int_CaliCell) {
   int n_CaliCells = int_CaliCell.n_elem;

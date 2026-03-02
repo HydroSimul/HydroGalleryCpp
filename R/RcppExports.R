@@ -234,9 +234,7 @@ NULL
 #' \insertAllCited{}
 #' @inheritParams all_vari
 #' @export
-landLeafAreaIndex_WaterGAP3 <- function(ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_, Time_dayOfYear_d) {
-    .Call(`_HydroGallery_landLeafAreaIndex_WaterGAP3`, ATMOS_temperature_Cel, ATMOS_precipitation_mm, CELL_latitude_deg, LAND_growUpDay_d, LAND_leafAreaIndexMin_, LAND_leafAreaIndexMax_, Time_dayOfYear_d)
-}
+NULL
 
 #' **capilarise**
 #' @name capirise
@@ -1346,6 +1344,13 @@ meteo_wetBulbTemperature <- function(ATMOS_vaporPress_kPa, ATMOS_temperature_Cel
     .Call(`_HydroGallery_meteo_wetBulbTemperature`, ATMOS_vaporPress_kPa, ATMOS_temperature_Cel)
 }
 
+#' @rdname percola
+#' @param param_PERCOLA_wat_01 <0, 1> 0: percolation, 1: non percolation [percola_WaterGAP3()]
+#' @param param_PERCOLA_wat_thresh <10, 15> coefficient parameter for [percola_WaterGAP3()]
+#' @param param_PERCOLA_wat_k <0.1, 1> exponential parameter for [percola_WaterGAP3()]
+#' @export
+NULL
+
 #' **percolation**
 #' @name percola
 #' @inheritParams all_vari
@@ -1504,15 +1509,6 @@ percola_SupplyRatio <- function(SOIL_water_mm, param_PERCOLA_sur_k) {
     .Call(`_HydroGallery_percola_SupplyRatio`, SOIL_water_mm, param_PERCOLA_sur_k)
 }
 
-#' @rdname percola
-#' @param param_PERCOLA_wat_01 <0, 1> 0: percolation, 1: non percolation [percola_WaterGAP3()]
-#' @param param_PERCOLA_wat_thresh <10, 15> coefficient parameter for [percola_WaterGAP3()]
-#' @param param_PERCOLA_wat_k <0.1, 1> exponential parameter for [percola_WaterGAP3()]
-#' @export
-percola_WaterGAP3 <- function(LAND_water_mm, SOIL_potentialPercola_mm, param_PERCOLA_wat_01, param_PERCOLA_wat_thresh, param_PERCOLA_wat_k) {
-    .Call(`_HydroGallery_percola_WaterGAP3`, LAND_water_mm, SOIL_potentialPercola_mm, param_PERCOLA_wat_01, param_PERCOLA_wat_thresh, param_PERCOLA_wat_k)
-}
-
 #' **Reservoir release**
 #' @name reservoi
 #' @inheritParams all_vari
@@ -1520,17 +1516,13 @@ percola_WaterGAP3 <- function(LAND_water_mm, SOIL_potentialPercola_mm, param_PER
 #' The concept of river estimates the waterbody outflow for waternet concentration
 #' @return outflow (m3)
 #' @export
-reservoiReleas_Hanasaki <- function(Reservoi_water_m3, Reservoi_inflow_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01) {
-    .Call(`_HydroGallery_reservoiReleas_Hanasaki`, Reservoi_water_m3, Reservoi_inflow_m3, Reservoi_demand_m3, Reservoi_capacity_m3, Reservoi_meanInflow_m3, Reservoi_meanDemand_m3, Reservoi_isIrrigate_01)
-}
+NULL
 
 #' @rdname reservoi
 #' @param param_Reservoi_han_alpha <0,1> 0.85 parameter for [reservoireleasCoefficent_Hanasaki()],
 #' @return new Reservoi_releaseCoefficient_1
 #' @export
-reservoiReleasCoefficent_Hanasaki <- function(Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_releaseCoefficient_1, Reservoi_isOperateStart_01, param_Reservoi_han_alpha) {
-    .Call(`_HydroGallery_reservoiReleasCoefficent_Hanasaki`, Reservoi_water_m3, Reservoi_capacity_m3, Reservoi_releaseCoefficient_1, Reservoi_isOperateStart_01, param_Reservoi_han_alpha)
-}
+NULL
 
 #' **river outflow**
 #' @name river
@@ -1557,31 +1549,23 @@ riverlakout_LinearResorvoir <- function(Riverlak_water_m3, Riverlak_inflow_m3, R
 #' @param int_Outflow A vector of integers representing the cell number of the next cell. 1-based indexing. When the next cell is see or none, should be marked as 0.
 #' @return A field of uvecs containing the inflow cells for each cell.
 #' @export
-get_inflow_cells <- function(int_Outflow) {
-    .Call(`_HydroGallery_get_inflow_cells`, int_Outflow)
-}
+NULL
 
 #' @rdname routingtopology
 #' @title Get Inflow Last Cell Matrix
 #' @description Creates a matrix of inflow cells for each cell.
 #' @export
-get_inflow_lastcell <- function(int_Outflow) {
-    .Call(`_HydroGallery_get_inflow_lastcell`, int_Outflow)
-}
+NULL
 
 #' @rdname routingtopology
 #' @description Creates a list of inflow cells for each step.
 #' @export
-get_step_cells <- function(inflow_cells) {
-    .Call(`_HydroGallery_get_step_cells`, inflow_cells)
-}
+NULL
 
 #' @rdname routingtopology
 #' @description Creates a field of last cells for each step.
 #' @export
-get_step_lastcell <- function(step_cells, inflow_lastcell) {
-    .Call(`_HydroGallery_get_step_lastcell`, step_cells, inflow_lastcell)
-}
+NULL
 
 #' @rdname routingtopology
 #' @param fn_Step_Cell Path to save the step_cells field.
@@ -1589,17 +1573,13 @@ get_step_lastcell <- function(step_cells, inflow_lastcell) {
 #'
 #' @return NULL (invisible)
 #' @export
-generate_step_cell <- function(int_Outflow, fn_Step_Cell, fn_Step_LastCell) {
-    invisible(.Call(`_HydroGallery_generate_step_cell`, int_Outflow, fn_Step_Cell, fn_Step_LastCell))
-}
+NULL
 
 #' @rdname routingtopology
 #' @param Step_cellNumber_int Cell number of the step.
 #' @param Extra_cellNumber_int Cell number of the extra cells.
 #' @export
-get_step_extra_cell <- function(Step_cellNumber_int, Extra_cellNumber_int) {
-    .Call(`_HydroGallery_get_step_extra_cell`, Step_cellNumber_int, Extra_cellNumber_int)
-}
+NULL
 
 #' @rdname routingtopology
 #' @param fn_Step_Cell Path to read the step_cells field.
@@ -1607,9 +1587,7 @@ get_step_extra_cell <- function(Step_cellNumber_int, Extra_cellNumber_int) {
 #' @param fn_Step_Extra_Cell path to write the step extra cell number.
 #' @return NULL (invisible)
 #' @export
-generate_step_extra_cell <- function(fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_Cell) {
-    invisible(.Call(`_HydroGallery_generate_step_extra_cell`, fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_Cell))
-}
+NULL
 
 #' @rdname routingtopology
 #' @param lst_Inflow_Cell A list of integer vectors, where each vector contains the cells that flow into the respective cell.
@@ -1617,9 +1595,7 @@ generate_step_extra_cell <- function(fn_Step_Cell, fn_Extra_Cell, fn_Step_Extra_
 #' @param int_TestCell An integer vector, cells to test.
 #' @return An integer vector of cells in the intersection of the station cells and the basin.
 #' @export
-get_cell_in_basin <- function(lst_Inflow_Cell, int_OutLet, int_TestCell) {
-    .Call(`_HydroGallery_get_cell_in_basin`, lst_Inflow_Cell, int_OutLet, int_TestCell)
-}
+NULL
 
 #' @rdname routingtopology
 #' @param int_UpstreamCell An integer vector containing the upstream cells to find the upstream basin.
@@ -1627,33 +1603,25 @@ get_cell_in_basin <- function(lst_Inflow_Cell, int_OutLet, int_TestCell) {
 #' This function identifies the upstream basin of a given outlet cell by first finding the intersection of the upstream cells
 #' with the cells that flow into the outlet. It then computes the set difference between the upstream basin and the outlet basin.
 #' @export
-get_inter_basin <- function(int_Cell, int_Outflow) {
-    .Call(`_HydroGallery_get_inter_basin`, int_Cell, int_Outflow)
-}
+NULL
 
 #' @rdname routingtopology
 #' @param int_Outflow_Ori An integer vector representing the original outflow indices (1-based).
 #' @param int_CellNew An integer vector representing the cells within the new basin.
 #' @return An integer vector of the new outflow indices adjusted for the sub-basin.
 #' @export
-get_new_outflow <- function(int_Cell, int_Outflow) {
-    .Call(`_HydroGallery_get_new_outflow`, int_Cell, int_Outflow)
-}
+NULL
 
 #' @rdname routingtopology
 #' @param int_CaliCell An integer vector of calibration cells.
 #' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 #' @export
-get_cali_step <- function(step_cells, int_Cali) {
-    .Call(`_HydroGallery_get_cali_step`, step_cells, int_Cali)
-}
+NULL
 
 #' @rdname routingtopology
 #' @return A list of integer vectors (`lst_Step_Cali`), where each element represents calibration cells at a specific step.
 #' @export
-get_upstream_cali_cell <- function(lst_Inflow_Cell, int_CaliCell) {
-    .Call(`_HydroGallery_get_upstream_cali_cell`, lst_Inflow_Cell, int_CaliCell)
-}
+NULL
 
 #' **snow**
 #' @name snowMelt
@@ -1739,35 +1707,27 @@ snowMelt_Factor <- function(SNOW_ice_mm, ATMOS_temperature_Cel, param_SNOWMELT_f
 #'   This will be updated to reflect remaining water after withdrawal.
 #' @return None. Parameters are updated by reference.
 #' @export
-withdraw_SingleCell <- function(CELL_withdrawal_m3, CELL_water_m3) {
-    invisible(.Call(`_HydroGallery_withdraw_SingleCell`, CELL_withdrawal_m3, CELL_water_m3))
-}
+NULL
 
 #' [withdrawSurface_AroundMax] This function identifies the surrounding cell with the maximum water availability
 #' and withdraws water from it to satisfy the demand.
 #' @rdname withdraw
 #' @param CELL_cellNumberAround_int Matrix of cell indices that define surrounding cells.
 #' @export
-withdrawSurface_AroundMax <- function(CELL_withdrawal_m3, RIVER_water_m3, Lake_water_m3, CELL_cellNumberAround_int) {
-    invisible(.Call(`_HydroGallery_withdrawSurface_AroundMax`, CELL_withdrawal_m3, RIVER_water_m3, Lake_water_m3, CELL_cellNumberAround_int))
-}
+NULL
 
 #' [withdrawSurface_Around] This function withdraws water from all surrounding cells proportionally
 #' based on their water availability.
 #' @rdname withdraw
 #' @export
-withdrawSurface_Around <- function(CELL_withdrawal_m3, RIVER_water_m3, Lake_cellNumber_int, Lake_water_m3, CELL_cellNumberAround_int) {
-    invisible(.Call(`_HydroGallery_withdrawSurface_Around`, CELL_withdrawal_m3, RIVER_water_m3, Lake_cellNumber_int, Lake_water_m3, CELL_cellNumberAround_int))
-}
+NULL
 
 #' [withdrawSurface_WithdrawNet] This function withdraws water by following a predefined network of cells
 #' from which water can be withdrawn.
 #' @name withdraw
 #' @param CELL_cellNumberWithdrawNet_int Matrix defining the withdrawal network.
 #' @export
-withdrawSurface_WithdrawNet <- function(CELL_withdrawal_m3, RIVER_water_m3, Lake_water_m3, CELL_cellNumberWithdrawNet_int) {
-    invisible(.Call(`_HydroGallery_withdrawSurface_WithdrawNet`, CELL_withdrawal_m3, RIVER_water_m3, Lake_water_m3, CELL_cellNumberWithdrawNet_int))
-}
+NULL
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {

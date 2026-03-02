@@ -9,7 +9,6 @@
 //' The concept of river estimates the waterbody outflow for waternet concentration
 //' @return outflow (m3)
 //' @export
-// [[Rcpp::export]]
 arma::vec reservoiReleas_Hanasaki(
     const arma::vec& Reservoi_water_m3,
     const arma::vec& Reservoi_inflow_m3,
@@ -66,7 +65,6 @@ arma::vec reservoiReleas_Hanasaki(
 //' @param param_Reservoi_han_alpha <0,1> 0.85 parameter for [reservoireleasCoefficent_Hanasaki()],
 //' @return new Reservoi_releaseCoefficient_1
 //' @export
-// [[Rcpp::export]]
 arma::vec reservoiReleasCoefficent_Hanasaki(
     const arma::vec& Reservoi_water_m3,
     const arma::vec& Reservoi_capacity_m3,

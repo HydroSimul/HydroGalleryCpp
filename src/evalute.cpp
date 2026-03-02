@@ -1,7 +1,7 @@
-#include <RcppArmadillo.h>
+#include "utils.h"
 // [[Rcpp::depends(RcppArmadillo)]]
-using namespace Rcpp;
 // [[Rcpp::interfaces(r, cpp)]]
+#include <stdexcept>
 
 //' Evaluate metrics
 //' @name evaluate
@@ -13,7 +13,7 @@ using namespace Rcpp;
 double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs) {
   // Ensure both vectors have the same length
   if (num_Sim.n_elem != num_Obs.n_elem) {
-    stop("Simulated and observed vectors must have the same length.");
+    throw std::invalid_argument("Simulated and observed vectors must have the same length.");
   }
   
   // Find non-NA indices in observed data
@@ -25,7 +25,7 @@ double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs) {
   
   // Ensure there are remaining values to compute NSE
   if (filtered_Obs.n_elem == 0) {
-    stop("All observed values are NA; cannot calculate NSE.");
+    throw std::invalid_argument("All observed values are NA; cannot calculate NSE.");
   }
   
   // Calculate the mean of observed values
@@ -47,7 +47,7 @@ double evalute_KGE(arma::vec num_Sim, arma::vec num_Obs,
                    double factor_r = 1.0, double factor_alpha = 1.0, double factor_beta = 1.0) {
   // Ensure both vectors have the same length
   if (num_Sim.n_elem != num_Obs.n_elem) {
-    stop("Simulated and observed vectors must have the same length.");
+    throw std::invalid_argument("Simulated and observed vectors must have the same length.");
   }
   
   // Find non-NA indices in observed data
@@ -59,7 +59,7 @@ double evalute_KGE(arma::vec num_Sim, arma::vec num_Obs,
   
   // Ensure there are remaining values to compute KGE
   if (filtered_Obs.n_elem == 0) {
-    stop("All observed values are NA; cannot calculate KGE.");
+    throw std::invalid_argument("All observed values are NA; cannot calculate KGE.");
   }
   
   // Calculate means of observed and simulated values

@@ -256,7 +256,6 @@ arma::vec percola_SupplyRatio(
 //' @param param_PERCOLA_wat_thresh <10, 15> coefficient parameter for [percola_WaterGAP3()]
 //' @param param_PERCOLA_wat_k <0.1, 1> exponential parameter for [percola_WaterGAP3()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_WaterGAP3(
     const arma::vec& LAND_water_mm,
     const arma::vec& SOIL_potentialPercola_mm,

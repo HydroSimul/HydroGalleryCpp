@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **confluence**
 //' @description 
 //' \loadmathjax
@@ -38,7 +35,6 @@
 //' @inheritParams all_vari
 //' @return confluenced water (mm/m2)
 //' @export
-// [[Rcpp::export]]
 arma::vec confluen_IUH(
     const arma::vec& CONFLUEN_inputWater_mm, 
     const arma::vec& CONFLUEN_iuh_1) {
@@ -64,7 +60,6 @@ arma::vec confluen_IUH(
 
 //' @rdname confluen
 //' @export
-// [[Rcpp::export]]
 arma::vec confluen_IUH2S(
     const arma::vec& LAND_runoff_mm,
     const arma::vec& GROUND_baseflow_mm, 
@@ -79,7 +74,6 @@ arma::vec confluen_IUH2S(
 
 //' @rdname confluen
 //' @export
-// [[Rcpp::export]]
 arma::vec confluen_IUH3S(
     const arma::vec& LAND_runoff_mm,
     const arma::vec& SOIL_interflow_mm, 
@@ -125,7 +119,6 @@ arma::vec confluen_IUH3S(
 //'   - \mjseqn{u} is IUH series
 //'   - \mjseqn{i} is index
 //' @export
-// [[Rcpp::export]]
 arma::vec confluenIUH_GR4J1(double CONFLUEN_responseTime_TS) {
   int t_max = std::ceil(CONFLUEN_responseTime_TS);
   arma::vec seq_t = arma::regspace(1, t_max);
@@ -147,7 +140,6 @@ arma::vec confluenIUH_GR4J1(double CONFLUEN_responseTime_TS) {
 //'   - \mjseqn{u} is IUH series
 //'   - \mjseqn{i} is index
 //' @export
-// [[Rcpp::export]]
 arma::vec confluenIUH_GR4J2(double CONFLUEN_responseTime_TS) {
   int t_max_1 = std::ceil(CONFLUEN_responseTime_TS);
   int t_max_2 = std::ceil(2 * CONFLUEN_responseTime_TS);
@@ -177,7 +169,6 @@ arma::vec confluenIUH_GR4J2(double CONFLUEN_responseTime_TS) {
 //'   - \mjseqn{k} is `param_CONFLUEN_kel_k`
 //' @param param_CONFLUEN_kel_k <1, 4> parameter for[confluenIUH_Kelly()]
 //' @export
-// [[Rcpp::export]]
 arma::vec confluenIUH_Kelly(double CONFLUEN_responseTime_TS, double param_CONFLUEN_kel_k) {
   double tc = CONFLUEN_responseTime_TS * param_CONFLUEN_kel_k;
   double tc2 = tc * tc;
@@ -220,7 +211,6 @@ arma::vec confluenIUH_Kelly(double CONFLUEN_responseTime_TS, double param_CONFLU
 //'   - \mjseqn{n} is `param_CONFLUEN_nas_n`
 //' @param param_CONFLUEN_nas_n <1, 8> parameter for[confluenIUH_Nash()]
 //' @export
-// [[Rcpp::export]]
 arma::vec confluenIUH_Nash(double CONFLUEN_responseTime_TS, double param_CONFLUEN_nas_n) {
   int t_max = std::ceil(std::max(4.0, param_CONFLUEN_nas_n) * 3 * CONFLUEN_responseTime_TS);
   arma::vec seq_t = arma::regspace(1, 20 * t_max) / 20.0;
@@ -243,7 +233,6 @@ arma::vec confluenIUH_Nash(double CONFLUEN_responseTime_TS, double param_CONFLUE
 //' where
 //'   - \mjseqn{t_r} is `CONFLUEN_responseTime_TS`
 //' @export
-// [[Rcpp::export]]
 arma::vec confluenIUH_Clark(double CONFLUEN_responseTime_TS) {
   int t_max = std::ceil(-CONFLUEN_responseTime_TS * std::log(CONFLUEN_responseTime_TS * 0.005));
   arma::vec seq_t = arma::regspace(1, 20 * t_max) / 20.0;

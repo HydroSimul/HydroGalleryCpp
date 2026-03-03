@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **infiltration**
 //' @name infilt
 //' @inheritParams all_vari
@@ -46,7 +43,6 @@
 //' 
 //' \mjsdeqn{F_{iflt}=\frac{C_{soil}\left(1-\left(\frac{W_{soil}}{C_{soil}}\right)^{2}\right) \tanh \left(\frac{W_{land}}{C_{soil}}\right)}{1+\frac{W_{soil}}{C_{soil}} \tanh \left(\frac{W_{land}}{C_{soil}}\right)}}
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_GR4J(
     const arma::vec& LAND_water_mm,
     const arma::vec& SOIL_water_mm,
@@ -75,7 +71,6 @@ arma::vec infilt_GR4J(
 //'   - \mjseqn{p_{imper}} is `LAND_impermeableFrac_1`
 //'   - \mjseqn{p_{AGEN}} is `param_INFILT_ubc_P0AGEN`
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_UBC(
     const arma::vec& LAND_water_mm, 
     const arma::vec& LAND_impermeableFrac_1, 
@@ -105,7 +100,6 @@ arma::vec infilt_UBC(
 //' @param param_INFILT_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 //' @return infilt_mm (mm/m2) 
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_SupplyRatio(
     const arma::vec& LAND_water_mm,
     const arma::vec& SOIL_water_mm,
@@ -131,7 +125,6 @@ arma::vec infilt_SupplyRatio(
 //'   - \mjseqn{k} is `param_INFILT_acr_k`
 //' @param param_INFILT_acr_k <0.01, 1> coefficient parameter for [infilt_AcceptRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_AcceptRatio(
     const arma::vec& LAND_water_mm, 
     const arma::vec& SOIL_water_mm,
@@ -161,7 +154,6 @@ arma::vec infilt_AcceptRatio(
 //' @param param_INFILT_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
 //' @param param_INFILT_sup_gamma <0, 1> parameters for [infilt_SupplyPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_SupplyPow(
     const arma::vec& LAND_water_mm,
     const arma::vec& SOIL_water_mm,
@@ -192,7 +184,6 @@ arma::vec infilt_SupplyPow(
 //' @param param_INFILT_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
 //' @param param_INFILT_acp_gamma <0.001, 5> parameters for [infilt_AcceptPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_AcceptPow(
     const arma::vec& LAND_water_mm, 
     const arma::vec& SOIL_water_mm,
@@ -221,7 +212,6 @@ arma::vec infilt_AcceptPow(
 //'   - \mjseqn{\beta} is `param_INFILT_hbv_beta`
 //' @param param_INFILT_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_HBV(
     const arma::vec& LAND_water_mm, 
     const arma::vec& SOIL_water_mm,
@@ -253,7 +243,6 @@ arma::vec infilt_HBV(
 //' 
 //' @param param_INFILT_xaj_B <0.01, 3> parameters for [infilt_XAJ()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_XAJ(
     const arma::vec& LAND_water_mm, 
     const arma::vec& SOIL_water_mm,
@@ -292,7 +281,6 @@ arma::vec infilt_XAJ(
 //'   - \mjseqn{B} is `param_INFILT_vic_B`
 //' @param param_INFILT_vic_B <0.01, 3> parameters for [infilt_VIC()]
 //' @export
-// [[Rcpp::export]]
 arma::vec infilt_VIC(
     const arma::vec& LAND_water_mm,
     const arma::vec& SOIL_water_mm,

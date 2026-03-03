@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **lateral flux**
 //' @name lateral
 //' @inheritParams all_vari
@@ -48,7 +45,6 @@
 //' @param param_LATERAL_sup_k <-1, 1> coefficient parameter for [lateral_SupplyPow()]
 //' @param param_LATERAL_sup_gamma <0.01, 5> parameters for [lateral_SupplyPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_SupplyPow(
     const arma::vec& GROUND_water_mm,
     const arma::vec& GROUND_capacity_mm,
@@ -75,7 +71,6 @@ arma::vec lateral_SupplyPow(
 //'   - \mjseqn{k} is `param_LATERAL_sur_k`
 //' @param param_LATERAL_sur_k <-2, 1> coefficient parameter for [lateral_SupplyRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_SupplyRatio(
     const arma::vec& GROUND_water_mm,
     const arma::vec& param_LATERAL_sur_k
@@ -94,7 +89,6 @@ arma::vec lateral_SupplyRatio(
 //' where
 //'   - \mjseqn{M_{ltrl}} is `GROUND_potentialLateral_mm`
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_GR4J(
     const arma::vec& GROUND_water_mm,
     const arma::vec& GROUND_capacity_mm,
@@ -119,7 +113,6 @@ arma::vec lateral_GR4J(
 //'   - \mjseqn{\gamma} is `param_LATERAL_grf_gamma`
 //' @param param_LATERAL_grf_gamma <0.01, 5> parameter for [lateral_GR4Jfix()]
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_GR4Jfix(
     const arma::vec& GROUND_water_mm,
     const arma::vec& GROUND_capacity_mm,
@@ -148,7 +141,6 @@ arma::vec lateral_GR4Jfix(
 //' @param param_LATERAL_thp_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
 //' @param param_LATERAL_thp_gamma <0.1, 5> exponential parameter for [lateral_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_ThreshPow(
     const arma::vec& GROUND_water_mm,
     const arma::vec& GROUND_capacity_mm,
@@ -182,7 +174,6 @@ arma::vec lateral_ThreshPow(
 //' @param param_LATERAL_arn_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
 //' @param param_LATERAL_arn_k <0.1, 1> exponential parameter for [lateral_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec lateral_Arno(
     const arma::vec& GROUND_water_mm,
     const arma::vec& GROUND_capacity_mm,

@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **snow**
 //' @name snowMelt
 //' @inheritParams all_vari
@@ -54,7 +51,6 @@
 //' @param param_SNOWMELT_kus_fE <0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for [snowMelt_Factor()]
 //' @param param_SNOWMELT_kus_fT <0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 //' @export
-// [[Rcpp::export]]
 arma::vec snowMelt_Kustas(
     const arma::vec& SNOW_ice_mm,
     const arma::vec& ATMOS_temperature_Cel,
@@ -83,7 +79,6 @@ arma::vec snowMelt_Kustas(
 //' @param param_SNOWMELT_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
 //' @param param_SNOWMELT_fac_f <0.5, 2> (mm/m2/day/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 //' @export
-// [[Rcpp::export]]
 arma::vec snowMelt_Factor(
     const arma::vec& SNOW_ice_mm,
     const arma::vec& ATMOS_temperature_Cel,

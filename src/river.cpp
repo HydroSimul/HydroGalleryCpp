@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **river outflow**
 //' @name river
 //' @inheritParams all_vari
@@ -9,7 +6,6 @@
 //' The concept of river estimates the waterbody outflow for waternet concentration
 //' @return outflow (m3)
 //' @export
-// [[Rcpp::export]]
 arma::vec riverout_LinearResorvoir(
     const arma::vec& RIVER_water_m3,
     const arma::vec& RIVER_inflow_m3,
@@ -27,7 +23,6 @@ arma::vec riverout_LinearResorvoir(
 //' @rdname river
 //' @param param_Riverlak_lin_storeFactor <unknown> parameter for [riverlak_LinearResorvoir()]
 //' @export
-// [[Rcpp::export]]
 arma::vec riverlakout_LinearResorvoir(
     const arma::vec& Riverlak_water_m3,
     const arma::vec& Riverlak_inflow_m3,

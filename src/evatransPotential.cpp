@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **potential evapotranspiration**
 //' @name evatransPotential
 //' @description 
@@ -30,7 +27,6 @@
 //' @param param_EVATRANS_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 //' @return potential evapotranspiration (mm/m2)
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransPotential_TurcWendling(
     const arma::vec& ATMOS_temperature_Cel, 
     const arma::vec& ATMOS_solarRadiat_MJ, 
@@ -54,7 +50,6 @@ arma::vec evatransPotential_TurcWendling(
 //'   - \mjseqn{T_d} is dewpoint temperature,
 //'   - \mjseqn{H_R} is relative humidity, `ATMOS_relativeHumidity_1`
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransPotential_Linacre(
     const arma::vec& ATMOS_temperature_Cel,
     const arma::vec& ATMOS_relativeHumidity_1,
@@ -86,7 +81,6 @@ arma::vec evatransPotential_Linacre(
 //'   - \mjseqn{e_a} is actual vapour pressure, `ATMOS_vaporPress_hPa`
 //'   - \mjseqn{\gamma} is psychrometric constant
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransPotential_FAO56(
     const arma::vec& ATMOS_temperature_Cel, 
     const arma::vec& ATMOS_vaporPress_hPa, 
@@ -115,7 +109,6 @@ arma::vec evatransPotential_FAO56(
 //' @rdname evatransPotential
 //' @param param_EVATRANS_prt_alpha <1, 2> parameter for [evatransPotential_PriestleyTaylor()], higher value when closer to the tropical
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransPotential_PriestleyTaylor(
     const arma::vec& ATMOS_temperature_Cel, 
     const arma::vec& ATMOS_netRadiat_MJ,

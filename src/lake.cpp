@@ -1,8 +1,4 @@
 #include "meteo.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
-
 //' **lake outflow**
 //' @name lakeout
 //' @description
@@ -12,7 +8,6 @@
 //' @param param_Lakeout_sup_gamma <unknown> parameter for [lakeout_SupplyPow()],
 //' @return outflow (m3)
 //' @export
-// [[Rcpp::export]]
 arma::vec lakeout_SupplyPow(
    const arma::vec& Lake_water_m3,
    const arma::vec& Lake_capacity_m3,
@@ -33,7 +28,6 @@ arma::vec lakeout_SupplyPow(
 //' @inheritParams all_vari
 //' @return evaporation of lake area (mm / day)
 //' @export
-// [[Rcpp::export]]
 arma::vec lakeevap_Zhao(const arma::vec& ATMOS_solarRadiat_MJ,
                         const arma::vec& ATMOS_temperature_Cel,
                         const arma::vec& ATMOS_vaporPress_kPa,

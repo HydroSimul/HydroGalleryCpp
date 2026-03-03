@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **actuall evapotranspiration**
 //' @name evatransActual
 //' @inheritParams all_vari
@@ -49,7 +46,6 @@
 //'   - \mjseqn{k} is `param_EVATRANS_sur_k`
 //' @param param_EVATRANS_sur_k <0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET  
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_SupplyRatio(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -75,7 +71,6 @@ arma::vec evatransActual_SupplyRatio(
 //' @param param_EVATRANS_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
 //' @param param_EVATRANS_sup_gamma <1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_SupplyPow(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -99,7 +94,6 @@ arma::vec evatransActual_SupplyPow(
 //'   - \mjseqn{\gamma} is `param_EVATRANS_vic_gamma`
 //' @param param_EVATRANS_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_VIC(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -123,7 +117,6 @@ arma::vec evatransActual_VIC(
 //' And it need **no parameter**.
 //' \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_GR4J(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -147,7 +140,6 @@ arma::vec evatransActual_GR4J(
 //'   - \mjseqn{\gamma} is `param_EVATRANS_ubc_gamma`
 //' @param param_EVATRANS_ubc_gamma <0.5, 2> parameter for [evatransActual_UBC()]
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_UBC(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -178,7 +170,6 @@ arma::vec evatransActual_UBC(
 //'   - \mjseqn{\gamma} is `param_EVATRANS_lia_gamma`
 //' @param param_EVATRANS_lia_gamma <0.4, 1> parameter for [evatransActual_LiangLand()]
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_LiangLand(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -206,7 +197,6 @@ arma::vec evatransActual_LiangLand(
 //' ![](liang_evatransSoil.png)
 //' @param param_EVATRANS_lia_B <0.01, 3> parameter for [evatransActual_LiangSoil()]
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_LiangSoil(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,
@@ -230,7 +220,6 @@ arma::vec evatransActual_LiangSoil(
 //' @rdname evatransActual
 //' @param param_EVATRANS_wat_petmax <10, 20> parameter for [evatransActual_WaterGAP()], 10 for arid area, 20 for humid area
 //' @export
-// [[Rcpp::export]]
 arma::vec evatransActual_WaterGAP3(
     const arma::vec& ATMOS_potentialEvatrans_mm,
     const arma::vec& water_mm,

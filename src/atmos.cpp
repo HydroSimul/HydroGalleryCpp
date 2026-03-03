@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' caculate **snowfall**
 //' @name atmosSnow
 //' @inheritParams all_vari
@@ -41,7 +38,6 @@
 //' 
 //' @param param_ATMOS_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 //' @export
-// [[Rcpp::export]]
 arma::vec atmosSnow_ThresholdT(
    const arma::vec& ATMOS_precipitation_mm, 
    const arma::vec& ATMOS_temperature_Cel, 
@@ -64,7 +60,6 @@ arma::vec atmosSnow_ThresholdT(
 //' 
 //' @param param_ATMOS_ubc_A0FORM <0.01, 3> (Cel) threshold air temperature that snow, it can not equal or small than 0, parameter for [atmosSnow_UBC()]
 //' @export
-// [[Rcpp::export]]
 arma::vec atmosSnow_UBC(
    const arma::vec& ATMOS_precipitation_mm, 
    const arma::vec& ATMOS_temperature_Cel, 

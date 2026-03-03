@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **baseflow**
 //' @name baseflow
 //' @inheritParams all_vari
@@ -47,7 +44,6 @@
 //' where
 //'   - \mjseqn{k^*} is estimated ratio
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_GR4J(
      const arma::vec& GROUND_water_mm,
      const arma::vec& GROUND_capacity_mm)
@@ -68,7 +64,6 @@ arma::vec baseflow_GR4J(
 //'   - \mjseqn{\gamma} is `param_BASEFLOW_grf_gamma`
 //' @param param_BASEFLOW_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_GR4Jfix(
      const arma::vec& GROUND_water_mm,
      const arma::vec& GROUND_capacity_mm,
@@ -89,7 +84,6 @@ arma::vec baseflow_GR4Jfix(
 //'   - \mjseqn{k} is `param_BASEFLOW_sur_k`
 //' @param param_BASEFLOW_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_SupplyRatio(
      const arma::vec& GROUND_water_mm,
      const arma::vec& param_BASEFLOW_sur_k)
@@ -109,7 +103,6 @@ arma::vec baseflow_SupplyRatio(
 //' @param param_BASEFLOW_sup_k <0.01, 1> coefficient parameter for [baseflow_SupplyPow()]
 //' @param param_BASEFLOW_sup_gamma <0, 1> exponential parameter for [baseflow_SupplyPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_SupplyPow(
      const arma::vec& GROUND_water_mm,
      const arma::vec& param_BASEFLOW_sup_k,
@@ -130,7 +123,6 @@ arma::vec baseflow_SupplyPow(
 //'   - \mjseqn{\gamma} is `param_BASEFLOW_map_gamma`
 //' @param param_BASEFLOW_map_gamma <0.1, 5> exponential parameter for [baseflow_MaxPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_MaxPow(
      const arma::vec& GROUND_water_mm,
      const arma::vec& GROUND_capacity_mm,
@@ -156,7 +148,6 @@ arma::vec baseflow_MaxPow(
 //' @param param_BASEFLOW_thp_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
 //' @param param_BASEFLOW_thp_gamma <0.1, 5> exponential parameter for [baseflow_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_ThreshPow(
      const arma::vec& GROUND_water_mm,
      const arma::vec& GROUND_capacity_mm,
@@ -190,7 +181,6 @@ arma::vec baseflow_ThreshPow(
 //' @param param_BASEFLOW_arn_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
 //' @param param_BASEFLOW_arn_k <0.1, 1> exponential parameter for [baseflow_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec baseflow_Arno(
      const arma::vec& GROUND_water_mm,
      const arma::vec& GROUND_capacity_mm,

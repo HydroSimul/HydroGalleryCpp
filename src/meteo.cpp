@@ -1,14 +1,10 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **meteological variables**
 //' some functions to calculate the meteological variables
 //' @inheritParams all_vari
 //' @name meteo
 //' @return meteological variables
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_solarRadiatClearSky_FAO56(
    const arma::vec& Time_dayOfYear_,
    const arma::vec& LAND_latitude_Degree,
@@ -28,7 +24,6 @@ arma::vec meteo_solarRadiatClearSky_FAO56(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_solarRadiatClearSky_WaterGAP3(
   const arma::vec& Time_dayOfYear_,
   const arma::vec& LAND_latitude_Degree
@@ -67,21 +62,18 @@ arma::vec meteo_solarRadiatClearSky_WaterGAP3(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_saturatVaporPress(const arma::vec& ATMOS_temperature_Cel) {
   return 6.1078 * exp(17.27 * ATMOS_temperature_Cel / (ATMOS_temperature_Cel + 237.3));
 }
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_saturatVaporPress_kPa(const arma::vec& ATMOS_temperature_Cel) {
   return .61078 * exp(17.27 * ATMOS_temperature_Cel / (ATMOS_temperature_Cel + 237.3));
 }
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_vaporPress(const arma::vec& ATMOS_temperature_Cel, const arma::vec& ATMOS_relativeHumidity_1) {
   return 6.1078 * exp(17.27 * ATMOS_temperature_Cel / (ATMOS_temperature_Cel + 237.3)) % ATMOS_relativeHumidity_1;
 }
@@ -89,7 +81,6 @@ arma::vec meteo_vaporPress(const arma::vec& ATMOS_temperature_Cel, const arma::v
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_nettoRadiat_FAO56(
     const arma::vec& Time_dayOfYear_,
     const arma::vec& ATMOS_temperature_Cel,
@@ -122,7 +113,6 @@ arma::vec meteo_nettoRadiat_FAO56(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_atmosEmissivity_FAO56(
    const arma::vec& Time_dayOfYear_,
    const arma::vec& ATMOS_temperature_Cel,
@@ -142,7 +132,6 @@ arma::vec meteo_atmosEmissivity_FAO56(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_cloudFactor_UNKNOW(
     const arma::vec& ATMOS_solarRadiat_MJ,
     const arma::vec& Time_dayOfYear_,
@@ -173,7 +162,6 @@ arma::vec meteo_cloudFactor_UNKNOW(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_atmosEmissivity_UNKNOW(
     const arma::vec& Time_dayOfYear_,
     const arma::vec& ATMOS_temperature_Cel,
@@ -194,7 +182,6 @@ arma::vec meteo_atmosEmissivity_UNKNOW(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_atmosEmissivity_Idso(const arma::vec& ATMOS_temperature_Cel) {
     arma::vec epsilon_a = 0.261 * arma::exp(-0.000777 * (ATMOS_temperature_Cel % ATMOS_temperature_Cel)) - 0.02;
     return epsilon_a;
@@ -203,7 +190,6 @@ arma::vec meteo_atmosEmissivity_Idso(const arma::vec& ATMOS_temperature_Cel) {
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_nettoLongRadiat_WaterGAP3(
    const arma::vec& ATMOS_temperature_Cel,
    const arma::vec& ATMOS_solarRadiat_MJ,
@@ -230,7 +216,6 @@ arma::vec meteo_nettoLongRadiat_WaterGAP3(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_nettoRadiat_WaterGAP3(
    const arma::vec& ATMOS_solarRadiat_MJ,
    const arma::vec& ATMOS_nettoLongRadiat_MJ,
@@ -244,7 +229,6 @@ arma::vec meteo_nettoRadiat_WaterGAP3(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_nettoRadiat_FAO56Simplify(
    const arma::vec& Time_dayOfYear_,
    const arma::vec& ATMOS_temperature_Cel,
@@ -275,14 +259,12 @@ arma::vec meteo_nettoRadiat_FAO56Simplify(
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_windSpeed2m(const arma::vec& ATMOS_windSpeed_m_s, const arma::vec& ATMOS_windMeasureHeight_m) {
     return ATMOS_windSpeed_m_s * 4.87 / (arma::log(67.8 * ATMOS_windMeasureHeight_m - 5.42));
 }
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_airDensity(const arma::vec& ATMOS_temperature_Cel,
                            const arma::vec& LAND_elevation_m) {
     // Constants
@@ -316,7 +298,6 @@ arma::vec meteo_airDensity(const arma::vec& ATMOS_temperature_Cel,
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_saturatDelta(const arma::vec& ATMOS_temperature_Cel) {
     // Delta
     arma::vec Delta = 4098 * (0.6108 * arma::exp(17.27 * ATMOS_temperature_Cel / (ATMOS_temperature_Cel + 237.3))) /
@@ -326,7 +307,6 @@ arma::vec meteo_saturatDelta(const arma::vec& ATMOS_temperature_Cel) {
 
 //' @rdname meteo
 //' @export
-// [[Rcpp::export]]
 arma::vec meteo_wetBulbTemperature(
     const arma::vec& ATMOS_vaporPress_kPa, 
     const arma::vec& ATMOS_temperature_Cel) {

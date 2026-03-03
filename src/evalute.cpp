@@ -1,6 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
 #include <stdexcept>
 
 //' Evaluate metrics
@@ -9,7 +7,6 @@
 //' @param num_Obs A numeric vector of observed values. NA values are removed along with corresponding values in num_Sim.
 //' @return A double representing the Evaluate metrics.
 //' @export
-// [[Rcpp::export]]
 double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs) {
   // Ensure both vectors have the same length
   if (num_Sim.n_elem != num_Obs.n_elem) {
@@ -42,7 +39,6 @@ double evalute_NSE(arma::vec num_Sim, arma::vec num_Obs) {
 //' @rdname evaluate
 //' @param factor_r,factor_alpha,factor_beta A double specifying the weight for the correlation term (r - 1), (alpha - 1) and (beta - 1). Default is 1.0.
 //' @export
-// [[Rcpp::export]]
 double evalute_KGE(arma::vec num_Sim, arma::vec num_Obs,
                    double factor_r = 1.0, double factor_alpha = 1.0, double factor_beta = 1.0) {
   // Ensure both vectors have the same length

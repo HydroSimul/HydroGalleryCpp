@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **percolation**
 //' @name percola
 //' @inheritParams all_vari
@@ -46,7 +43,6 @@
 //' where
 //'   - \mjseqn{k^*} is estimated ratio
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_GR4J(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm
@@ -64,7 +60,6 @@ arma::vec percola_GR4J(
 //'   - \mjseqn{k} is `param_PERCOLA_grf_k`
 //' @param param_PERCOLA_grf_k <0.01, 1> coefficient parameter for [percola_GR4Jfix()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_GR4Jfix(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -84,7 +79,6 @@ arma::vec percola_GR4Jfix(
 //'   - \mjseqn{\gamma} is `param_baseflow_map_gamma`
 //' @param param_PERCOLA_map_gamma <0.1, 5> exponential parameter for [percola_MaxPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_MaxPow(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -109,7 +103,6 @@ arma::vec percola_MaxPow(
 //' @param param_PERCOLA_thp_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
 //' @param param_PERCOLA_thp_gamma <0.1, 5> exponential parameter for [percola_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_ThreshPow(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -140,7 +133,6 @@ arma::vec percola_ThreshPow(
 //' @param param_PERCOLA_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
 //' @param param_PERCOLA_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_Arno(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -189,7 +181,6 @@ arma::vec percola_Arno(
 //'   - \mjseqn{k_{fc}} is `SOIL_fieldCapacityPerc_1`
 //'   - \mjseqn{\gamma} is `param_PERCOLA_sup_gamma`
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_BevenWood(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -219,7 +210,6 @@ arma::vec percola_BevenWood(
 //' @param param_PERCOLA_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
 //' @param param_PERCOLA_sup_gamma <0, 7> parameter for [percola_SupplyPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_SupplyPow(
     const arma::vec& SOIL_water_mm,
     const arma::vec& SOIL_capacity_mm,
@@ -242,7 +232,6 @@ arma::vec percola_SupplyPow(
 //'   - \mjseqn{k} is `param_PERCOLA_sur_k`
 //' @param param_PERCOLA_sur_k <0.01, 1> coefficient parameter for [percola_SupplyRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec percola_SupplyRatio(
     const arma::vec& SOIL_water_mm,
     const arma::vec& param_PERCOLA_sur_k

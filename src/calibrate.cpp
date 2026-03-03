@@ -1,14 +1,8 @@
-#include <RcppArmadillo.h>
+#include "utils.h"
 #include <random>
 #include <vector>
 #include <cmath>
-#include <stdexcept>
-
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
-using Rcpp::List;
-
+#include <iostream>
 // Helper function to generate a binary vector with probability P_i
 static std::vector<bool> generate_binary_vector(int n_x, double P_i, std::default_random_engine &generator) {
   std::bernoulli_distribution distribution(P_i);
@@ -25,7 +19,7 @@ static std::vector<bool> generate_binary_vector(int n_x, double P_i, std::defaul
 //' It attempts to find the optimal parameter values that minimize the given objective (fitness) function.
 //'
 //' @name calibrate
-//' @param fitness An Rcpp-exported C++ function (callable from R and C++) that accepts (x, other_data) and returns arma::vec (first element is objective).
+//' @param fitness A C++ function (callable from R and C++) that accepts (x, other_data) and returns arma::vec (first element is objective).
 //' @param lst_OtherData A field of additional data passed to `fitness`.
 //' @param x_Min A numeric vector of lower bounds for each parameter.
 //' @param x_Max A numeric vector of upper bounds for each parameter.
@@ -95,7 +89,7 @@ arma::vec cali_DDS(arma::vec (*fitness)(const arma::vec&, const arma::field<arma
 
   arma::vec sigma_ = x_Max - x_Min;
 
-  Rcpp::Rcout << "Calibration in progress...\n";
+  std::cout << "Calibration in progress...\n";
   int progress_step = std::max(1, max_iter / 10);
 
   for (int iter = 1; iter < max_iter; iter++) {
@@ -130,7 +124,7 @@ arma::vec cali_DDS(arma::vec (*fitness)(const arma::vec&, const arma::field<arma
     }
 
     if ((iter % progress_step) == 0) {
-      Rcpp::Rcout << "Iteration " << iter << " / " << max_iter << " completed. Current best = " << y_Best << "\n";
+      std::cout << "Iteration " << iter << " / " << max_iter << " completed. Current best = " << y_Best << "\n";
     }
   }
 

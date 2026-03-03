@@ -1,8 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
-
 //' **capilarise**
 //' @name capirise
 //' @inheritParams all_vari
@@ -48,7 +44,6 @@
 //'   - \mjseqn{M_{capi}} is `SOIL_potentialCapirise_mm`
 //'   
 //' @export
-// [[Rcpp::export]]
 arma::vec capirise_HBV(
    const arma::vec& GROUND_water_mm, 
    const arma::vec& SOIL_water_mm,
@@ -71,7 +66,6 @@ arma::vec capirise_HBV(
 //' where
 //'   - \mjseqn{k_{fc}} is `SOIL_fieldCapacityPerc_1`
 //' @export
-// [[Rcpp::export]]
 arma::vec capirise_HBVfix(
    const arma::vec& GROUND_water_mm, 
    const arma::vec& SOIL_water_mm,
@@ -97,7 +91,6 @@ arma::vec capirise_HBVfix(
 //'   - \mjseqn{k_{fc}} is `SOIL_fieldCapacityPerc_1`
 //' @param param_CAPIRISE_acr_k <0.01, 1> coefficient parameter [capirise_AcceptRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec capirise_AcceptRatio(
    const arma::vec& GROUND_water_mm, 
    const arma::vec& SOIL_water_mm,
@@ -125,7 +118,6 @@ arma::vec capirise_AcceptRatio(
 //' @param param_CAPIRISE_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
 //' @param param_CAPIRISE_acp_gamma <0.01, 1> exponential parameter for [capirise_AcceptPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec capirise_AcceptPow(
    const arma::vec& GROUND_water_mm, 
    const arma::vec& SOIL_water_mm,

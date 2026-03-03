@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **interflow**
 //' @name inteflow
 //' @inheritParams all_vari
@@ -47,7 +44,6 @@
 //' @param param_INTEFLOW_grf_k <0.01, 1> coefficient parameter for [inteflow_GR4Jfix()]
 //' @param param_INTEFLOW_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_GR4Jfix(arma::vec SOIL_water_mm,
                             arma::vec SOIL_capacity_mm,
                             arma::vec param_INTEFLOW_grf_k,
@@ -66,7 +62,6 @@ arma::vec inteflow_GR4Jfix(arma::vec SOIL_water_mm,
 //'   - \mjseqn{\gamma} is `param_INTEFLOW_map_gamma`
 //' @param param_INTEFLOW_map_gamma <0.1, 5> exponential parameter for [inteflow_MaxPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_MaxPow(arma::vec SOIL_water_mm,
                            arma::vec SOIL_capacity_mm,
                            arma::vec SOIL_potentialInteflow_mm,
@@ -89,7 +84,6 @@ arma::vec inteflow_MaxPow(arma::vec SOIL_water_mm,
 //' @param param_INTEFLOW_thp_thresh <0.1, 0.9> coefficient parameter for [inteflow_ThreshPow()]
 //' @param param_INTEFLOW_thp_gamma <0.1, 5> exponential parameter for [inteflow_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_ThreshPow(arma::vec SOIL_water_mm,
                               arma::vec SOIL_capacity_mm,
                               arma::vec SOIL_potentialInteflow_mm,
@@ -118,7 +112,6 @@ arma::vec inteflow_ThreshPow(arma::vec SOIL_water_mm,
 //' @param param_INTEFLOW_arn_thresh <0.1, 0.9> coefficient parameter for [inteflow_ThreshPow()]
 //' @param param_INTEFLOW_arn_k <0.1, 1> exponential parameter for [inteflow_ThreshPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_Arno(arma::vec SOIL_water_mm,
                          arma::vec SOIL_capacity_mm,
                          arma::vec SOIL_potentialInteflow_mm,
@@ -145,7 +138,6 @@ arma::vec inteflow_Arno(arma::vec SOIL_water_mm,
 //'   - \mjseqn{k_{fc}} is `SOIL_fieldCapacityPerc_1`
 //'   - \mjseqn{\gamma} is `param_INTEFLOW_sup_gamma`
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_BevenWood(arma::vec SOIL_water_mm,
                               arma::vec SOIL_capacity_mm,
                               arma::vec SOIL_fieldCapacityPerc_1,
@@ -171,7 +163,6 @@ arma::vec inteflow_BevenWood(arma::vec SOIL_water_mm,
 //' @param param_INTEFLOW_sp0_k <0.01, 1> coefficient parameter for [inteflow_SupplyPow0()]
 //' @param param_INTEFLOW_sp0_gamma <0, 1> exponential parameter for [inteflow_SupplyPow0()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_SupplyPow0(arma::vec SOIL_water_mm,
                                arma::vec param_INTEFLOW_sp0_k,
                                arma::vec param_INTEFLOW_sp0_gamma) {
@@ -191,7 +182,6 @@ arma::vec inteflow_SupplyPow0(arma::vec SOIL_water_mm,
 //' @param param_INTEFLOW_sup_k <0.01, 1> coefficient parameter for [inteflow_SupplyPow()]
 //' @param param_INTEFLOW_sup_gamma <0, 7> parameter for [inteflow_SupplyPow()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_SupplyPow(arma::vec SOIL_water_mm,
                               arma::vec SOIL_capacity_mm,
                               arma::vec param_INTEFLOW_sup_k,
@@ -211,7 +201,6 @@ arma::vec inteflow_SupplyPow(arma::vec SOIL_water_mm,
 //'   - \mjseqn{k} is `param_INTEFLOW_sur_k`
 //' @param param_INTEFLOW_sur_k <0.01, 1> coefficient parameter for [inteflow_SupplyRatio()]
 //' @export
-// [[Rcpp::export]]
 arma::vec inteflow_SupplyRatio(arma::vec SOIL_water_mm,
                                 arma::vec param_INTEFLOW_sur_k) {
   return param_INTEFLOW_sur_k % SOIL_water_mm;

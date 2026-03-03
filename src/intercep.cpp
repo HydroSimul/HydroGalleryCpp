@@ -1,7 +1,4 @@
 #include "utils.h"
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //' **interception** water from land goes into the soil.
 //' @name intercep
 //' @inheritParams all_vari
@@ -26,7 +23,6 @@
 //'   - \mjseqn{W_{icpt}} is `LAND_intercepWater_mm`
 //' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 //' @export
-// [[Rcpp::export]]
 arma::vec intercep_Full(
     const arma::vec& ATMOS_precipitation_mm,
     const arma::vec& LAND_interceptWater_mm,

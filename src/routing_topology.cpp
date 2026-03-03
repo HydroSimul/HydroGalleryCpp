@@ -1,10 +1,6 @@
 #include "utils.h"
 #include <unordered_map>
 #include <unordered_set>
-
-// [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::interfaces(r, cpp)]]
-
 //'  routingtopology
 //' @name routingtopology
 //' @title Get Inflow Cells
@@ -13,7 +9,7 @@
 //' @return A field of uvecs containing the inflow cells for each cell.
 //' @export
 arma::field<arma::uvec> get_inflow_cells(const arma::uvec& int_Outflow) {
-  int n = int_Outflow.n_elem;
+  const arma::uword n = int_Outflow.n_elem;
   std::vector<std::vector<arma::uword>> temp(n);
 
   for (arma::uword i = 0; i < n; ++i) {
@@ -66,9 +62,9 @@ arma::umat get_inflow_lastcell(const arma::uvec& int_Outflow) {
 //' @description Creates a list of inflow cells for each step.
 //' @export
 arma::field<arma::uvec> get_step_cells(const arma::field<arma::uvec>& inflow_cells) {
-  int n = inflow_cells.n_elem;
+  const arma::uword n = inflow_cells.n_elem;
   arma::uvec lengths(n);
-  for (int i = 0; i < n; ++i)
+  for (arma::uword i = 0; i < n; ++i)
     lengths(i) = inflow_cells(i).n_elem;
 
   std::set<arma::uword> unique_lengths(lengths.begin(), lengths.end());
@@ -79,7 +75,7 @@ arma::field<arma::uvec> get_step_cells(const arma::field<arma::uvec>& inflow_cel
     length_to_step[sorted_lengths[i]] = i + 1;
 
   std::vector<std::vector<arma::uword>> step_groups(sorted_lengths.size());
-  for (int i = 0; i < n; ++i)
+  for (arma::uword i = 0; i < n; ++i)
     step_groups[length_to_step[lengths(i)] - 1].push_back(i + 1);
 
   arma::field<arma::uvec> result(sorted_lengths.size());
@@ -152,7 +148,7 @@ arma::field<arma::uvec> get_step_extra_cell(
 {
   arma::field<arma::uvec> Step_Extra_cellNumber_int(Step_cellNumber_int.n_elem);
   
-  for (int i = 0; i < Step_cellNumber_int.n_elem; ++i) {
+  for (arma::uword i = 0; i < Step_cellNumber_int.n_elem; ++i) {
     const arma::uvec& step_cells = Step_cellNumber_int(i);
     // Get 1-based indices of matches
     Step_Extra_cellNumber_int(i) = get_extra_in_step(step_cells, Extra_cellNumber_int); // +1 for 1-based indexing
@@ -244,15 +240,15 @@ arma::uvec get_cell_in_basin(const arma::field<arma::uvec>& lst_Inflow_Cell,
 //' @export
 arma::uvec get_inter_basin(const arma::uvec& int_Cell, const arma::uvec& int_Outflow) {
   int n = int_Cell.n_elem;
-  arma::ivec out(n, arma::fill::value(NA_INTEGER));
+  arma::uvec out(n, arma::fill::zeros);
 
   for (int i = 0; i < n; ++i) {
     int id = int_Cell[i] - 1;
     int next = int_Outflow[id];
-    out[i] = (std::find(int_Cell.begin(), int_Cell.end(), next) == int_Cell.end()) ? next : NA_INTEGER;
+    out[i] = (std::find(int_Cell.begin(), int_Cell.end(), next) == int_Cell.end()) ? next : 0;
   }
 
-  return arma::conv_to<arma::uvec>::from(out);
+  return out;
 }
 
 //' @rdname routingtopology
@@ -261,8 +257,8 @@ arma::uvec get_inter_basin(const arma::uvec& int_Cell, const arma::uvec& int_Out
 //' @return An integer vector of the new outflow indices adjusted for the sub-basin.
 //' @export
 arma::uvec get_new_outflow(const arma::uvec& int_Cell, const arma::uvec& int_Outflow) {
-  int n = int_Cell.n_elem;
-  arma::ivec result(n, arma::fill::value(NA_INTEGER));
+  const arma::uword n = int_Cell.n_elem;
+  arma::uvec result(n, arma::fill::zeros);
   std::unordered_map<arma::uword, arma::uword> old_to_new;
 
   for (arma::uword i = 0; i < n; ++i)
@@ -300,15 +296,15 @@ arma::uvec get_cali_step(const arma::field<arma::uvec>& step_cells,
 //' @export
 arma::field<arma::uvec> get_upstream_cali_cell(const arma::field<arma::uvec>& lst_Inflow_Cell,
                                                const arma::uvec& int_CaliCell) {
-  int n_CaliCells = int_CaliCell.n_elem;
+  const arma::uword n_CaliCells = int_CaliCell.n_elem;
 
   arma::field<arma::uvec> lst_Cali_Upstream(n_CaliCells);
-  for (int i = 0; i < n_CaliCells; ++i) {
+  for (arma::uword i = 0; i < n_CaliCells; ++i) {
     lst_Cali_Upstream(i) = get_cell_in_basin(lst_Inflow_Cell, int_CaliCell(i), int_CaliCell);
   }
 
   arma::field<arma::uvec> lst_LastCaliCell(n_CaliCells);
-  for (int i = 0; i < n_CaliCells; ++i) {
+  for (arma::uword i = 0; i < n_CaliCells; ++i) {
     arma::uvec upstream_cells = lst_Cali_Upstream(i);
     std::unordered_set<arma::uword> upstream_indices;
 

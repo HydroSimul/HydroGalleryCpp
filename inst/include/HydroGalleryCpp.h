@@ -2,6 +2,8 @@
 #define HYDROGALLERYCPP_API_H
 
 #include <armadillo>
+#include <cstdint>
+#include <functional>
 
 // Global function declarations from HydroGalleryCpp core
 arma::vec atmosSnow_ThresholdT(
@@ -113,6 +115,26 @@ void withdrawSurface_Around(
     const arma::uvec& Lake_cellNumber_int,
     arma::vec& Lake_water_m3,
     const arma::umat& CELL_cellNumberAround_int);
+
+struct DDSOptions {
+  int max_iter = 100;
+  double r = 0.2;
+  std::uint64_t seed = 12345ULL;
+  bool verbose = false;
+};
+
+struct DDSResult {
+  arma::vec x_best;
+  double y_best;
+  int evaluations;
+};
+
+DDSResult cali_DDS(
+    const std::function<double(const arma::vec&)>& objective,
+    const arma::vec& x_Min,
+    const arma::vec& x_Max,
+    const arma::vec& x_Init,
+    const DDSOptions& opt);
 
 // Backward-compatible namespace expected by existing WaterGAP3Cpp code
 namespace HydroGallery {
